@@ -1,0 +1,29 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.outer {
+  height: 100vh;
+}
+
+.fill-color {
+  background-color: rgb(240, 239, 239);
+}
+.login-btn {
+  height: 60px;
+  width: 208px;
+  border-radius: 15px;
+  font-size: 22px;
+}
+
+.btn-outline-secondary {
+  background-color: rgb(240, 239, 239);
+}
+.input-field {
+  height: 50px;
+}
+.login-img .pic{
+    height: 242px;
+    width: 431px;
+  
+}
