@@ -39,6 +39,32 @@ require_once '../headers/header.php'
             </li>
             <li class="sidebar-list-item">
                 <a href="#" class="dropdown-toggle">
+                <i class="bi bi-collection"></i> Category
+                </a>
+                <ul class="list-unstyled mx-4 collapse" id="CategorySubmenu">
+                    <li class="mt-2">
+                        <a href="../pages/registrtion.php">View</a>
+                    </li>
+                    <li class="mt-2">
+                        <a href="../pages/category/category.php">Create</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-list-item">
+                <a href="#" class="dropdown-toggle">
+                <i class="bi bi-card-heading"></i> Job Title
+                </a>
+                <ul class="list-unstyled mx-4 collapse" id="jobTitleSubmenu">
+                    <li class="mt-2">
+                        <a href="../pages/registrtion.php">View</a>
+                    </li>
+                    <li class="mt-2">
+                        <a href="../pages/job_title/jobTitle.php">Create</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-list-item">
+                <a href="#" class="dropdown-toggle">
                     <i class="bi bi-buildings"></i> Company
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="CompanySubmenu">
@@ -111,6 +137,10 @@ $(document).ready(function() {
     $('#candidateSubmenu').hide();
     $('#CompanySubmenu').hide();
     $('#JobOrders').hide();
+    $('#CategorySubmenu').hide();
+    $('#jobTitleSubmenu').hide();
+
+    
     
     // Toggle the submenu on click
     $('.dropdown-toggle').click(function(e) {
