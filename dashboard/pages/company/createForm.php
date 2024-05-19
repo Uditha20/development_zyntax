@@ -14,7 +14,6 @@
             display: none;
         }
     </style>
-
 </head>
 
 <body>
@@ -26,7 +25,7 @@
             <div class="row g-3">
                 <div class="col-md-5 mb-3">
                     <div><label>Name :</label></div>
-                    <input type="text" class="form-control capitalize" id="name" placeholder="Name">
+                    <input type="text" class="form-control capitalize" id="name" placeholder=" Ex : Zyntax">
                     <div class="invalid-feedback">
                         Please enter a valid name (only letters and spaces).
                     </div>
@@ -35,7 +34,8 @@
                 <div class="col-md-5 mb-3">
                     <div><label>Country : </label></div>
 
-                    <input type="text" class="form-control capitalize" id="country" placeholder="Country" required>
+                    <input type="text" class="form-control capitalize" id="country" placeholder="Ex : Sri Lanka"
+                        required>
                     <div class="invalid-feedback">
                         Please enter a valid country name (only letters and spaces).
                     </div>
@@ -45,7 +45,7 @@
     <div class="row g-3">
         <div class="col-md-5 mb-3">
             <div><label>Phone :</label></div>
-            <input type="tel" class="form-control" id="phone" placeholder="Phone" required>
+            <input type="tel" class="form-control" id="phone" placeholder="Ex : 07737xxx" required>
             <div class="invalid-feedback">
                 Please enter a valid phone number (10 digits).
             </div>
@@ -54,7 +54,7 @@
         <div class="col-md-5 mb-3">
             <div><label>Email :</label></div>
 
-            <input type="email" class="form-control" id="email" placeholder="Email" required>
+            <input type="email" class="form-control" id="email" placeholder="Ex :Example@gmail.com" required>
             <div class="invalid-feedback">
                 Please enter a valid email address.
             </div>

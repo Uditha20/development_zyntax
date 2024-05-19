@@ -35,7 +35,7 @@ body {
   grid-area: sidebar;
   height: 100%;
   /* background-color: gray; */
-  overflow-y:auto;
+  overflow-y: auto;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
 }
@@ -75,19 +75,21 @@ body {
 }
 /* Hover effect for main sidebar list items */
 .sidebar-list-item:hover {
-    background-color: royalblue;
-    cursor: pointer;
-    color: white; /* Optional: change text color on hover */
+  background-color: royalblue;
+  cursor: pointer;
+  color: white; /* Optional: change text color on hover */
 }
 
-#candidateSubmenu a:hover, #CompanySubmenu a:hover,#JobOrders a:hover ,#CategorySubmenu a:hover,#jobTitleSubmenu a:hover{
-  
+#candidateSubmenu a:hover,
+#CompanySubmenu a:hover,
+#JobOrders a:hover,
+#CategorySubmenu a:hover,
+#jobTitleSubmenu a:hover {
   cursor: pointer;
   color: white; /* This changes text color on hover */
 }
 
-CompanySubmenu
-.sidebar-responsive {
+CompanySubmenu .sidebar-responsive {
   display: inline !important;
   position: absolute;
   z-index: 12 !important;
