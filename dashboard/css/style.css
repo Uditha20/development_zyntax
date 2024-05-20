@@ -219,3 +219,8 @@ CompanySubmenu .sidebar-responsive {
     display: none;
   }
 }
+
+
+.capitalize {
+  text-transform: uppercase;
+}
