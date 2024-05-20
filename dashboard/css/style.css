@@ -25,6 +25,9 @@ body {
   background-image: url("../../img/Graphic\ Side.png");
   /* background-color: royalblue; */
 }
+.l1 {
+  font-weight: bold;
+}
 
 .menu-icon {
   display: none;
