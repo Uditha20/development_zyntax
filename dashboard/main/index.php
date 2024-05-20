@@ -131,6 +131,9 @@ require_once '../headers/header.php'
 
     </main>
 </div>
+<?php
+require_once '../headers/footer.php'
+?>
 <script>
 $(document).ready(function() {
     // Initially hide the submenu
@@ -153,7 +156,7 @@ $(document).ready(function() {
 <script>
     $(document).ready(function() {
      
-        $('.main-container').load('card.php');       
+        // $('.main-container').load('card.php');       
         $('.list-unstyled a').click(function(e) {
             e.preventDefault(); 
             var page = $(this).attr('href');
