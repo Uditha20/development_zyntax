@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        label {
+        /* label {
             font-weight: bold;
-        }
+        } */
 
         .invalid-feedback {
             display: none;
+        }
+
+        .l1 {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -24,7 +28,7 @@
         <form action="" id="myForm">
             <div class="row g-3">
                 <div class="col-md-5 mb-3">
-                    <div><label>Name :</label></div>
+                    <div class="l1"><label>Name :</label></div>
                     <input type="text" class="form-control capitalize" id="name" placeholder=" Ex : Zyntax">
                     <div class="invalid-feedback">
                         Please enter a valid name (only letters and spaces).
@@ -32,7 +36,7 @@
                 </div>
 
                 <div class="col-md-5 mb-3">
-                    <div><label>Country : </label></div>
+                    <div class="l1"><label>Country : </label></div>
 
                     <input type="text" class="form-control capitalize" id="country" placeholder="Ex : Sri Lanka"
                         required>
@@ -44,7 +48,7 @@
     </div>
     <div class="row g-3">
         <div class="col-md-5 mb-3">
-            <div><label>Phone :</label></div>
+            <div class="l1"><label>Phone :</label></div>
             <input type="tel" class="form-control" id="phone" placeholder="Ex : 07737xxx" required>
             <div class="invalid-feedback">
                 Please enter a valid phone number (10 digits).
@@ -52,7 +56,7 @@
         </div>
 
         <div class="col-md-5 mb-3">
-            <div><label>Email :</label></div>
+            <div class="l1"><label>Email :</label></div>
 
             <input type="email" class="form-control" id="email" placeholder="Ex :Example@gmail.com" required>
             <div class="invalid-feedback">
