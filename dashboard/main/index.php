@@ -43,7 +43,7 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="list-unstyled mx-4 collapse" id="CategorySubmenu">
                     <li class="mt-2">
-                        <a href="../pages/registrtion.php">View</a>
+                        <a href="../pages/category/categoryView.php">View</a>
                     </li>
                     <li class="mt-2">
                         <a href="../pages/category/category.php">Create</a>

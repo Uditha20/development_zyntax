@@ -8,19 +8,19 @@ $response = array();
 // Check if the category name is received
 if (isset($_POST['category'])) {
     $categoryName = $_POST['category'];
-
+    // echo json_encode((["status" => "success","id"=>$categoryName]));
     // Process the data (e.g., save to the database)
     // For now, just return the received data
     // $response = array(
     //     'status' => 'success',
     //     'message' => 'Category received: ' . $categoryName
     // );
-    $result=insertCategory($categoryName,$conn);
+    $result = insertCategory($categoryName, $conn);
     if ($result) {
         $response = array(
-        'status' => 'success',
-        'message' => 'Category insert success'
-    );
+            'status' => 'success',
+            'message' => 'Category insert success'
+        );
     }
 } else {
     $response = array(

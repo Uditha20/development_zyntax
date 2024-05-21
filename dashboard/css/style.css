@@ -227,3 +227,7 @@ CompanySubmenu .sidebar-responsive {
 .capitalize {
   text-transform: uppercase;
 }
+
+.form-control{
+  border: 1px solid;
+}
