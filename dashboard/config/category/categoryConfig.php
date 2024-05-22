@@ -7,7 +7,7 @@ $response = array();
 
 // Check if the category name is received
 if (isset($_POST['category'])) {
-    $categoryName = $_POST['category'];
+    $categoryName = strtoupper($_POST['category']);
     // echo json_encode((["status" => "success","id"=>$categoryName]));
     // Process the data (e.g., save to the database)
     // For now, just return the received data

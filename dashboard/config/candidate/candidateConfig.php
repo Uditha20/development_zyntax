@@ -3,18 +3,21 @@ require_once '../../../db/dbconfig.php';
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $dob = $_POST['dob'];
-    $gender = $_POST['gender'];
-    $passportNo = $_POST['PassportNo'];
-    $passportExpire = $_POST['PassportExpire'];
-    $nameInPassport = $_POST['NamePassport'];
-    $mobile = $_POST['Mobile'];
-    $email = $_POST['Email'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
+    $firstname = strtoupper(htmlspecialchars($_POST['firstname']));
+    $lastname = strtoupper(htmlspecialchars($_POST['lastname']));
+    $dob = htmlspecialchars($_POST['dob']);
+    $gender = htmlspecialchars($_POST['gender']);
+    $passportNo = htmlspecialchars($_POST['PassportNo']);
+    $passportExpire = htmlspecialchars($_POST['PassportExpire']);
+    $nameInPassport = strtoupper(htmlspecialchars($_POST['NamePassport']));
+    $mobile = htmlspecialchars($_POST['Mobile']);
+    $email = htmlspecialchars($_POST['Email']);
+    $address = htmlspecialchars($_POST['address']);
+    $city = htmlspecialchars($_POST['city']);
+    $candidateid = htmlspecialchars($_POST['candidateid']);
 
+
+   
     // Handle file uploads
     $cv = $_FILES['cv'];
     $passport = $_FILES['passport'];
@@ -51,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    $stmt = $conn->prepare("INSERT INTO candidate (first_name, last_name, dob, gender, passport_no, pass_expire_date, name_in_pass_full, mobile, email, address, city, cv, passport) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssss", $firstname, $lastname, $dob, $gender, $passportNo, $passportExpire, $nameInPassport, $mobile, $email, $address, $city, $cvPath, $passportPath);
+    $stmt = $conn->prepare("INSERT INTO candidate (first_name, last_name, dob, gender, passport_no, pass_expire_date, name_in_pass_full, mobile, email, address, city,employee_id, cv, passport) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssssssss", $firstname, $lastname, $dob, $gender, $passportNo, $passportExpire, $nameInPassport, $mobile, $email, $address, $city,$candidateid ,$cvPath, $passportPath);
 
     if ($stmt->execute()) {
         $response['db'] = 'Data saved successfully.';

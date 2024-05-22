@@ -1,6 +1,7 @@
 <?php
 
 require_once '../headers/header.php'
+
 ?>
 
 <div class="grid-container">
@@ -69,10 +70,10 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="CompanySubmenu">
                     <li class="mt-2">
-                        <a href="#">View</a>
+                        <a href="../pages/company/viewCompany.php">View</a>
                     </li>
                     <li class="mt-2">
-                        <a href="../pages/company/createForm.php">Create</a>
+                        <a href="../pages/company/createFormCompany.php">Create</a>
                     </li>
                 </ul>
 
@@ -89,7 +90,7 @@ require_once '../headers/header.php'
                         <a href="../pages/jobOrder/createJob.php">Create</a>
                     </li>
                     <li class="mt-2">
-                        <a href="#">Assign job</a>
+                        <a href="../pages/jobOrder/assignJob.php">Assign job</a>
                     </li>
                 </ul>
             </li>
@@ -99,7 +100,7 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="Status">
                     <li class="mt-2">
-                        <a href="#">Assign State</a>
+                        <a href="">Assign State</a>
                     </li>
                     <li class="mt-2">
                         <a href="#">Interview</a>

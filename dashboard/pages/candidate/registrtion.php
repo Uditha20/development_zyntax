@@ -52,7 +52,7 @@ require_once '../../headers/header.php'
     <div class="row">
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Name in Full Passport :</label></div>
-            <input type="text" class="form-control" id="NamePassport" name="NamePassport" placeholder=" Ex " required>
+            <input type="text" class="form-control capitalize" id="NamePassport" name="NamePassport" placeholder=" Ex " required>
         </div>
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Mobile Number</label></div>
@@ -96,17 +96,20 @@ require_once '../../headers/header.php'
 </form>
 <script>
     $(document).ready(function() {
+        function fetchCandidateId() {
         $.ajax({
-                url: '../config/candidate/candidateIdGenarate.php',
-                type: 'GET',
-                success: function(response) {
-                    // Set the fetched employee ID in the input field
-                    $('#candidateid').val(response.candidate_id);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error fetching employee ID:', textStatus, errorThrown);
-                }
-            });
+            url: '../config/candidate/candidateIdGenarate.php',
+            type: 'GET',
+            success: function(response) {
+                // Set the fetched candidate ID in the input field
+                $('#candidateid').val(response.candidate_id);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error fetching candidate ID:', textStatus, errorThrown);
+            }
+        });
+    }
+    fetchCandidateId();
         $('#candidateForm').on('submit', function(e) {
             e.preventDefault();
             // Validate files
@@ -159,6 +162,7 @@ require_once '../../headers/header.php'
                         if (result.isConfirmed) {
                             // Clear the form fields
                             $('#candidateForm')[0].reset();
+                            fetchCandidateId();
                         }
                     });
                 },
