@@ -31,7 +31,7 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="list-unstyled mx-4 collapse" id="candidateSubmenu">
                     <li class="mt-2">
-                        <a href="../pages/registrtion.php">View</a>
+                        <a href="../pages/candidate/viewCandidate.php">View</a>
                     </li>
                     <li class="mt-2">
                         <a href="../pages/candidate/registrtion.php">Create</a>
@@ -57,7 +57,7 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="list-unstyled mx-4 collapse" id="jobTitleSubmenu">
                     <li class="mt-2">
-                        <a href="../pages/registrtion.php">View</a>
+                        <a href="../pages/job_title/viewjobTitle.php">View</a>
                     </li>
                     <li class="mt-2">
                         <a href="../pages/job_title/jobTitle.php">Create</a>
@@ -84,10 +84,10 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="JobOrders">
                     <li class="mt-2">
-                        <a href="#">View</a>
+                        <a href="../pages/jobOrder/createJob.php">Create Vacancies </a>
                     </li>
                     <li class="mt-2">
-                        <a href="../pages/jobOrder/createJob.php">Create</a>
+                        <a href="../pages/jobOrder/viewVacancies.php">View Vacancies</a>
                     </li>
                     <li class="mt-2">
                         <a href="../pages/jobOrder/assignJob.php">Assign job</a>
@@ -95,25 +95,22 @@ require_once '../headers/header.php'
                 </ul>
             </li>
             <li class="sidebar-list-item">
-                <a href="#" data-bs-toggle="collapse" data-bs-target="#Status" aria-expanded="false" class="dropdown-toggle">
-                    <i class="bi bi-app-indicator"></i> Status
+                <a  href="#" class="dropdown-toggle">
+                <i class="bi bi-app-indicator"></i> Status
                 </a>
-                <ul class="collapse list-unstyled mx-4" id="Status">
+                <ul class="collapse list-unstyled mx-4" id="status">
                     <li class="mt-2">
-                        <a href="">Assign State</a>
+                        <a href="../pages/status/assignStatus.php">Assign Status</a>
                     </li>
                     <li class="mt-2">
-                        <a href="#">Interview</a>
+                        <a href="">Select Status</a>
                     </li>
                     <li class="mt-2">
-                        <a href="#">Select State</a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="#">Visa Received</a>
+                        <a href="">Visa Process</a>
                     </li>
                 </ul>
             </li>
-
+    
             <li class="sidebar-list-item">
                 <a href="#" target="_blank">
                     <i class="bi bi-credit-card-2-back"></i> Payments
@@ -143,9 +140,7 @@ $(document).ready(function() {
     $('#JobOrders').hide();
     $('#CategorySubmenu').hide();
     $('#jobTitleSubmenu').hide();
-
-    
-    
+    $('#status').hide();
     // Toggle the submenu on click
     $('.dropdown-toggle').click(function(e) {
         e.preventDefault();  
@@ -157,7 +152,7 @@ $(document).ready(function() {
 <script>
     $(document).ready(function() {
      
-        // $('.main-container').load('card.php');       
+        $('.main-container').load('card.php');       
         $('.list-unstyled a').click(function(e) {
             e.preventDefault(); 
             var page = $(this).attr('href');

@@ -8,6 +8,14 @@
 
     <script>
         $(document).ready(function() {
+            Swal.fire({
+                        title: 'Loading...',
+                        text: 'Please wait while we fetch the data.',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
             $.ajax({
                 url: "../config/category/categoryViewConfig.php",
                 type: "GET",
@@ -15,6 +23,7 @@
                     action: "catData"
                 },
                 success: function(response) {
+                    Swal.close();
                     if (response.status === 'success') {
                         $('#categoryTable').DataTable({
                             data: response.data,
@@ -25,10 +34,7 @@
                                         return meta.row + 1;
                                     }
                                 },
-                                {
-                                    data: "id",
-                                    title: "ID"
-                                },
+                             
                                 {
                                     data: "categoryName",
                                     title: "Category Name"
