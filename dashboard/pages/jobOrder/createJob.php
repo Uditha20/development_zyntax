@@ -1,3 +1,4 @@
+
 <form id="jobOrder">
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -29,7 +30,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
-
     <script>
         $(document).ready(function() {
             // Initialize Select2

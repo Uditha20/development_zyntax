@@ -1,8 +1,8 @@
 <body>
     <div class="container">
-        <h3>Assigned Candidate</h3>
+        <h3>Select state</h3>
         <div class="row">
-            <div class="col-md-3 mb-4">
+            <!-- <div class="col-md-3 mb-4">
                 <label for="dateInput" class="form-label">Select Date</label>
                 <input type="date" class="form-control" id="dateInput" name="dateInput">
             </div>
@@ -10,11 +10,11 @@
                 <label for="timeInput" class="form-label">Select Time</label>
                 <input type="time" class="form-control" id="timeInput" name="timeInput">
             </div>
-        
-                <div class="col-md-3" style="margin-top: 33px;">
-                    <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
-                </div>
-       
+         -->
+            <div class="col-md-3 mb-3" style="margin-top: 33px;">
+                <button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+            </div>
+
         </div>
         <table id="categoryTable" class="table table-bordered table-striped">
 
@@ -33,10 +33,10 @@
                     }
                 });
                 $.ajax({
-                    url: "../config/status/assignConfig.php",
+                    url: "../config/visa/visaConfig.php",
                     type: "GET",
                     data: {
-                        action: "assignData"
+                        action: "visaProcess"
                     },
                     success: function(response) {
                         // console.log(response);
@@ -80,6 +80,7 @@
                                         data: "job_title_name",
                                         title: "Job Title Name"
                                     },
+                                   
                                     // {
                                     //     data: null,
                                     //     title: "Edit",
@@ -113,8 +114,7 @@
             }
             assignData();
             $('#submitButton').click(function() {
-                const selectedDate = $('#dateInput').val();
-                const selectedTime = $('#timeInput').val();
+
                 const selectedIds = [];
 
                 $('.select-checkbox:checked').each(function() {
@@ -129,22 +129,17 @@
                     });
                     return;
                 }
-
                 const dataToSend = {
-                    action: 'saveData',
+                    action: 'finalselect',
                     assign_to_job_ids: selectedIds,
-                    date: selectedDate,
-                    time: selectedTime
                 };
-
-                // console.log('Data to send:', dataToSend);
-
                 $.ajax({
                     url: "../config/status/dateTimeAssignConfig.php",
                     type: "POST",
                     data: JSON.stringify(dataToSend),
                     contentType: "application/json",
                     success: function(response) {
+                        // console.log(response);
                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',

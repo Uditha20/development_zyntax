@@ -1,6 +1,3 @@
-<?php
-require_once '../../headers/header.php'
-?>
 <form id="candidateForm" enctype="multipart/form-data">
     <div class="col-md-5 mb-3">
         <div class="l1"><label>Candidate ID</label></div>
@@ -79,14 +76,14 @@ require_once '../../headers/header.php'
     <div class="row">
         <div class="col-md-5 mb-3">
             <div class="l1"><label>CV</label></div>
-            <input type="file" class="form-control" id="cv" name="cv" required>
+            <input type="file" class="form-control" id="cv" name="cv">
             <div class="invalid-feedback" id="cvError">
                 Please upload a valid PDF file less than 3MB.
             </div>
         </div>
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Passport</label></div>
-            <input type="file" class="form-control" id="passport" name="passport" required>
+            <input type="file" class="form-control" id="passport" name="passport">
             <div class="invalid-feedback" id="passportError">
                 Please upload a valid PDF file less than 3MB.
             </div>
@@ -113,33 +110,6 @@ require_once '../../headers/header.php'
         $('#candidateForm').on('submit', function(e) {
             e.preventDefault();
             // Validate files
-            let isValid = true;
-            const maxSize = 3 * 1024 * 1024; // 3MB in bytes
-            const cv = $('#cv')[0].files[0];
-            const passport = $('#passport')[0].files[0];
-            const validFileType = 'application/pdf';
-
-            // Reset error messages
-            $('#cvError').hide();
-            $('#passportError').hide();
-
-            if (cv) {
-                if (cv.type !== validFileType || cv.size > maxSize) {
-                    $('#cvError').show();
-                    isValid = false;
-                }
-            }
-
-            if (passport) {
-                if (passport.type !== validFileType || passport.size > maxSize) {
-                    $('#passportError').show();
-                    isValid = false;
-                }
-            }
-
-            if (!isValid) {
-                return;
-            }
             var formData = new FormData(this);
 
             $.ajax({

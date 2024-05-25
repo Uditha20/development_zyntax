@@ -1,4 +1,4 @@
-<body>
+<button class="btn btn-primary mb-4" id="createCompanyButton" style="height: 55px;">Add Company</button>
     <div class="container">
         <h3>Company List</h3>
         <table id="categoryTable" class="table table-bordered table-striped">

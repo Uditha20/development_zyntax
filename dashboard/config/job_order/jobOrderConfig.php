@@ -66,7 +66,7 @@ switch ($action) {
         if (isset($_POST['joborder']) && isset($_POST['Candidate'])) {
             $joborderId = intval($_POST['joborder']);
             $candidateId = intval($_POST['Candidate']);
-            $result = insertJobAssign($conn, $joborderId,$joborderId);
+            $result = insertJobAssign($conn, $joborderId, $candidateId);
             if ($result == 1) {
                 echo json_encode(['status' => 'success', 'message' => 'Job order registered successfully']);
             } else {

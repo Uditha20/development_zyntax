@@ -85,4 +85,3 @@ function getJobTitles($conn) {
         return [];
     }
 }
-?>

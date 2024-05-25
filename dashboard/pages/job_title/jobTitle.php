@@ -39,7 +39,7 @@
         type: 'GET',
         url: '../config/job_title/job_titleConfig.php',
         data: {
-          action: 'Catdata'
+          action: 'activCatdata'
         },
         dataType: 'json',
         success: function(response) {

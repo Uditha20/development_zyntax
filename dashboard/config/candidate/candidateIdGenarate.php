@@ -30,5 +30,3 @@ echo json_encode(['candidate_id' => $newEmployeeId]);
 
 
 $conn->close();
-
-?>

@@ -1,7 +1,7 @@
-<body>
-    <div class="container">
-        <h3>Job Title List</h3>
-        <table id="candidateTable" class="table table-bordered table-striped">
+    <button class="btn btn-primary mb-4" id="createCandidateButton" style="height: 55px;">Register Candidate</button>
+    <div class="table-container ">
+        <h3>Candidate List</h3>
+        <table id="candidateTable" class="display" style="width: 100%;">
 
         </table>
     </div>
@@ -59,10 +59,7 @@
                             data: "email",
                             title: "Email"
                         },
-                        {
-                            data: "address",
-                            title: "Address"
-                        },
+                    
                         {
                             data: "city",
                             title: "City"

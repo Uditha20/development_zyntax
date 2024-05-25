@@ -1,4 +1,5 @@
-<body>
+<button class="btn btn-primary mb-4" id="createTitleButton" style="height: 55px;">Add Title</button>
+
     <div class="container">
         <h3>Job Title List</h3>
         <table id="categoryTable" class="table table-bordered table-striped">

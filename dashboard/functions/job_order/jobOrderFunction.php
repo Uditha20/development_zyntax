@@ -125,7 +125,3 @@ function insertJobAssign($conn, $job_order_id,$candidate_id) {
         return 0;
     }
 }
-
-
-
-?>

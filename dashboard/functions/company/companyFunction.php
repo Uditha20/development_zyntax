@@ -24,6 +24,3 @@ function fetchCompany($conn) {
 
     return $data;
 }
-
-
-?>

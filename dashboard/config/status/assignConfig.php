@@ -17,8 +17,17 @@ switch ($action) {
         $result = getAssignToJobDetails($conn);
         echo json_encode(["status" => "success", "data" => $result]);
         break;
+    case 'interviewData':
+        $result=getinterview($conn);
+        echo json_encode(["status" => "success", "data" => $result]);
+        break;
+    case 'selectData':
+        $result=selectstate($conn);
+        echo json_encode(["status" => "success", "data" => $result]);
+        break;
+
+   
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
         break;
 }
-?>

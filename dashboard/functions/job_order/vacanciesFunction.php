@@ -51,5 +51,3 @@ function fetchActiveJobOrders($conn) {
     $stmt->close();
     return $jobOrders;
 }
-
-?>

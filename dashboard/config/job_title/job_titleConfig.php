@@ -19,7 +19,12 @@ switch ($action) {
         $DetailCategory = getJobTitles($conn);
         echo json_encode(["status" => "success", "data" => $DetailCategory]);
         break;
-    
+    case 'activCatdata':
+        // Handle employee data action
+        $DetailCategory = fetchActiveCategories($conn);
+        echo json_encode(["status" => "success", "data" => $DetailCategory]);
+        break;
+
     case 'Create':
         if (isset($_POST['categoryId']) && isset($_POST['fieldName'])) {
             $cat_Id = $_POST['categoryId'];
@@ -38,8 +43,8 @@ switch ($action) {
         }
 
         break;
-    
-        
+
+
 
 
     default:

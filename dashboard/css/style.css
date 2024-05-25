@@ -23,7 +23,7 @@ body {
   padding: 0 30px 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
   background-image: url("../../img/Graphic\ Side.png");
-  overflow: auto;
+  /* overflow: auto; */
   /* background-color: royalblue; */
 }
 .l1 {
@@ -88,7 +88,7 @@ body {
 #CompanySubmenu a:hover,
 #JobOrders a:hover,
 #CategorySubmenu a:hover,
-#jobTitleSubmenu a:hover {
+#jobTitleSubmenu a:hover,#status a:hover ,#visa a:hover {
   cursor: pointer;
   color: white; /* This changes text color on hover */
 }
@@ -178,7 +178,7 @@ CompanySubmenu .sidebar-responsive {
 /* ---------- MEDIA QUERIES ---------- */
 
 /* Medium <= 992px */
-
+/* 
 @media screen and (max-width: 992px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -199,10 +199,10 @@ CompanySubmenu .sidebar-responsive {
   .sidebar-title > span {
     display: inline;
   }
-}
-
+} */
+/* 
 /* Small <= 768px */
-
+/* 
 @media screen and (max-width: 768px) {
   .main-cards {
     grid-template-columns: 1fr;
@@ -217,12 +217,12 @@ CompanySubmenu .sidebar-responsive {
 }
 
 /* Extra Small <= 576px */
-
+/* 
 @media screen and (max-width: 576px) {
   .hedaer-left {
     display: none;
   }
-}
+}  */
 
 
 .capitalize {
@@ -231,4 +231,12 @@ CompanySubmenu .sidebar-responsive {
 
 .form-control{
   border: 1px solid;
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+table.dataTable {
+  width: 100%;
 }

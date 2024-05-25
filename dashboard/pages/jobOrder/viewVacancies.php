@@ -1,4 +1,4 @@
-<body>
+<button class="btn btn-primary mb-4" id="createJobButton" style="height: 55px;">Add Job Order</button>
     <div class="container">
         <h3>Job Title List</h3>
         <table id="jobDetailsTable" class="table table-bordered table-striped">

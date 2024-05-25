@@ -1,5 +1,4 @@
 <?php
-
 require_once '../../../db/dbconfig.php';
 require_once '../../functions/candidate/viewcandidateFunction.php';
 
@@ -17,5 +16,3 @@ switch ($action) {
        $result= fetchCandidateDetails($conn);
        echo json_encode(["status"=>"success","data"=>$result]);
 }
-
-?>

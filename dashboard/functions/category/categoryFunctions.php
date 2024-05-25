@@ -22,5 +22,3 @@ function insertCategory($categoryName,$conn) {
         return 0;
     }
 }
-
-?>

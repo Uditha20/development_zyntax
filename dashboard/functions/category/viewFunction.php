@@ -15,4 +15,3 @@ function fetchCategories($conn) {
 
     return $data;
 }
-?>

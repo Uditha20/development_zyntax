@@ -1,4 +1,4 @@
-<body>
+<button class="btn btn-primary mb-4" id="AddcategoryButton" style="height: 55px;">Add Category</button>
     <div class="container">
         <h3>Category List</h3>
         <table id="categoryTable" class="table table-bordered table-striped">

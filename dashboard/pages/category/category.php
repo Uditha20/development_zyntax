@@ -1,5 +1,3 @@
-
-
 <div class="row d-flex justify-content-center mt-5">
     <form id="CategoryCreationForm">
         <div class="d-flex align-items-center" style="flex-direction: column;">

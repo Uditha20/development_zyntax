@@ -36,4 +36,3 @@ function fetchCandidateDetails($conn) {
     $stmt->close();
     return $candidates;
 }
-?>
