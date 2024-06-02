@@ -1,13 +1,14 @@
 <button class="btn btn-primary mb-4" id="createCompanyButton" style="height: 55px;">Add Company</button>
-    <div class="container">
-        <h3>Company List</h3>
-        <table id="categoryTable" class="table table-bordered table-striped">
+<div class="container">
+    <h3>Company List</h3>
+    <table id="categoryTable" class="table table-bordered table-striped">
 
-        </table>
-    </div>
+    </table>
+</div>
 
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
+        function companyDetails() {
             $.ajax({
                 url: "../config/company/companyConfig.php",
                 type: "GET",
@@ -52,17 +53,17 @@
                                     title: "Phone"
                                 },
                                 {
-                                    data: null,
+                               
                                     title: "Edit",
                                     render: function(data, type, row, meta) {
-                                        return '<button class="btn btn-warning btn-sm edit-btn" data-id="' + meta.row + '">Edit</button>';
+                                        return '<button class="btn btn-warning btn-sm edit-btn" data-id="' + row.id + '">Edit</button>';
                                     }
                                 },
                                 {
-                                    data: null,
+                                   
                                     title: "Delete",
                                     render: function(data, type, row, meta) {
-                                        return '<button class="btn btn-danger btn-sm delete-btn" data-id="' + meta.row + '">Delete</button>';
+                                        return '<button class="btn btn-danger btn-sm delete-btn" data-id="' + row.id + '">Delete</button>';
                                     }
                                 }
                             ],
@@ -81,5 +82,50 @@
                     console.error('Error fetching data:', textStatus, errorThrown);
                 }
             });
-        });
-    </script>
+        }
+        companyDetails()
+        $('#categoryTable').on('click', '.delete-btn', function() {
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX call to delete the item
+                    $.ajax({
+                        type: 'POST',
+                        url: '../config/company/companyConfig.php',
+                        data: {
+                            action: 'delete',
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'The record has been deleted.',
+                                icon: 'success'
+                            }).then(() => {
+                                // Call companyDetails function to reload the data
+                                companyDetails();
+                            });
+                        } else {
+                            Swal.fire('Error!', 'Failed to delete the record.', 'error');
+                        }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire('Error!', 'AJAX error: ' + error, 'error');
+                        }
+                    });
+                }
+            });
+        })
+    
+        })
+</script>

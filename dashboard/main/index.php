@@ -18,8 +18,8 @@ require_once '../headers/header.php'
             <!-- <span onclick="closeSidebar()"><i class="bi bi-x-lg"></i></span> -->
         </div>
         <ul class="sidebar-list">
-            <li class="sidebar-list-item ">
-                <a href="#">
+            <li class="sidebar-list-item new-link">
+                <a href="card.php">
                     <i class="bi bi-speedometer"></i> <u>Dashboard</u>
                 </a>
             </li>
@@ -119,10 +119,10 @@ require_once '../headers/header.php'
                         <a href="../pages/visa/VisaprocessStatus.php">Visa process State</a>
                     </li>
                     <li class="mt-2">
-                        <a href="../pages/status/interviewStatus.php">Visa Recived</a>
+                        <a href="../pages/visa/visaRecevied.php">Deploye State</a>
                     </li>
                     <li class="mt-2">
-                        <a href="../pages/status/selectState.php">Visa Rejected</a>
+                        <a href="../pages/visa/rejectVisa.php">Visa Rejected</a>
                     </li>
 
 
@@ -215,6 +215,23 @@ require_once '../headers/footer.php'
         $(document).on('click', '#createJobButton', function(e) {
             e.preventDefault();
             $('.main-container').load('../pages/jobOrder/createJob.php');
+        });
+
+        $(document).on('click', '.edit-btn', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/company/editCompany.php?id=' + id);
+        });
+        $(document).on('click', '.editcandidate-btn', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/candidate/editCandidate.php?id=' + id);
+        });
+
+        $(document).on('click', '.edit-btntitle', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/job_title/EditTitle.php?id=' + id);
         });
     });
 </script>

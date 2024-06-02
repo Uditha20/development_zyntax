@@ -6,7 +6,7 @@ require_once './headers/header.php'
 <body class="">
 
 
-    <div class="outer d-flex justify-content-center ">
+    <div class="outer d-flex justify-content-center align-items-center ">
 
         <div>
             <div class="login-img  ">

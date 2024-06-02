@@ -10,7 +10,7 @@
             </div>
             <div class="mb-3 col-md-4">
                 <label for="payement" class="form-label">Payement</label>
-                <input type="text" class="form-control border border-dark capitalize" id="payement" name="payement" aria-describedby="fieldNameHelp" placeholder="Ex: 10000.00">
+                <input type="Number" class="form-control border border-dark capitalize" id="payement" name="payement" aria-describedby="fieldNameHelp" placeholder="Ex: 10000.00">
             </div>
             <button type="submit" class="btn btn-primary ">Add payement</button>
         </div>

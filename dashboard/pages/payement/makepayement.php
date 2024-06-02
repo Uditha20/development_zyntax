@@ -15,7 +15,7 @@
             <input type="text" class="form-control" id="Payement" name="Payement" placeholder="" readonly>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="l1"><label>Total Payed</label></div>
+            <div class="l1"><label>Total Paid</label></div>
             <input type="text" class="form-control" id="Payed" name="Payed" placeholder="" readonly>
         </div>
         <div class="col-md-4 mb-3">
@@ -26,7 +26,7 @@
     <div class="col-md-6 mb-3">
         <div class="col-md-6 mb-3">
             <div class="l1"><label>Add Payment</label></div>
-            <input type="text" class="form-control" id="Pay_amount" name="Pay_amount" placeholder="Ex" required>
+            <input type="Number" class="form-control" id="Pay_amount" name="Pay_amount" placeholder="" required>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Make payment</button>
@@ -129,22 +129,22 @@
                 processData: false,
                 dataType: 'json',
                 success: function(response) {
-                    // if (response.status === 'success') {
-                    //     Swal.fire({
-                    //         title: 'Success!',
-                    //         text: response.message,
-                    //         icon: 'success',
-                    //         confirmButtonText: 'OK'
-                    //     }).then((result) => {
-                    //         if (result.isConfirmed) {
-                    //             // Clear the form fields
-                    //             $('#makepayemnt')[0].reset();
-                    //             $('#Candidate').val(null).trigger('change');
-                    //         }
-                    //     });
-                    // } else {
-                    //     Swal.fire('Error', response.message, 'error');
-                    // }
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: response.message,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Clear the form fields
+                                $('#makepayemnt')[0].reset();
+                                $('#Candidate').val(null).trigger('change');
+                            }
+                        });
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
                     console.log(response); // Log the response for debugging
                 },
                 error: function(xhr, status, error) {

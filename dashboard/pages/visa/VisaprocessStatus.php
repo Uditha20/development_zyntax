@@ -51,13 +51,7 @@
                                             return meta.row + 1;
                                         }
                                     },
-                                    {
-                                        data: null,
-                                        title: "Select",
-                                        render: function(data, type, row, meta) {
-                                            return '<input type="checkbox" class="select-checkbox" data-id="' + row.assign_to_job_id + '">';
-                                        }
-                                    },
+                                   
 
                                     {
                                         data: "employee_id",
@@ -91,7 +85,7 @@
                                         data: null,
                                         title: "Action",
                                         render: function(data, type, row, meta) {
-                                            return '<button class="btn btn-danger btn-sm delete-btn" data-id="' + row.assign_to_job_id + '">Reject</button>';
+                                            return '<button class="btn btn-danger btn-sm reject-btn" data-id="' + row.assign_to_job_id + '">Reject</button>';
                                         }
                                     },
 
@@ -128,11 +122,61 @@
                     contentType: "application/json",
                     success: function(response) {
                         if (response.status === 'success') {
-                            Swal.fire({
-                                icon: 'info',
-                                title: 'Payment Status',
-                                text: response.message
-                            });
+                            if (response.message === 'Payment complete.') {
+                                // Show confirmation dialog
+                                Swal.fire({
+                                    title: 'Payment complete',
+                                    text: "Are you sure you want to proceed with migration?",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Yes, proceed'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Perform the necessary action when payment is complete
+                                        $.ajax({
+                                            url: "../config/status/dateTimeAssignConfig.php", // URL for migration action
+                                            type: "POST",
+                                            data: JSON.stringify({
+                                                assign_to_job_id: assignToJobId,
+                                                action: 'migratecandidate',
+                                            }),
+                                            contentType: "application/json",
+                                            success: function(migrateResponse) {
+                                                if (migrateResponse.status === 'success') {
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: 'Success',
+                                                        text: 'Migration is successful.'
+                                                    });
+                                                    assignData();
+                                                } else {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'Error',
+                                                        text: 'Migration failed: '
+                                                    });
+                                                }
+                                                // console.log(migrateResponse);
+                                            },
+                                            error: function(xhr, status, error) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'Error',
+                                                    text: 'AJAX error during migration: ' + error
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'info',
+                                    title: 'Payment Status',
+                                    text: response.message
+                                });
+                            }
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -152,5 +196,63 @@
                 });
             });
 
-        });
+
+      
+
+        // reject the candudate 
+        $(document).on('click', '.reject-btn', function() {
+            const assignToJobId = $(this).data('id');
+            const dataToSend = {
+                action: 'reject',
+                assign_to_job_id: assignToJobId
+            };
+
+            // Show confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to reject this candidate?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, reject it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User confirmed, send the AJAX request
+                    $.ajax({
+                        url: "../config/status/dateTimeAssignConfig.php",
+                        type: "POST",
+                        data: JSON.stringify(dataToSend),
+                        contentType: "application/json",
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Rejected!',
+                                    text: response.message,
+                                });
+                                
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message,
+                                });
+                            }
+                            assignData();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX error:', status, error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to reject the assignment.',
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
+    });
     </script>

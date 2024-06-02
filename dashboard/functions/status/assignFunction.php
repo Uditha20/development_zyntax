@@ -1,4 +1,14 @@
 <?php
+
+// waiting =1
+// interview=2
+// interviewlist =3 pass
+// interview fsail=0
+// select statw=4 
+// visa process =5
+// visar apporve=6
+// visa reject =7
+
 function getAssignToJobDetails($conn)
 {
     $sql = "
@@ -306,4 +316,169 @@ function checkPaymentStatus($conn, $id) {
     }
 
     return $message;
+}
+
+
+function updateAssignState($conn, $assign_to_job_id) {
+    $sql = "UPDATE assign_to_job SET assign_state = 6 WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+      
+        $stmt->bind_param("i", $assign_to_job_id);
+        if ($stmt->execute()) {
+           
+            $stmt->close();
+            return true; 
+        } else {
+            
+            $stmt->close();
+            return false;
+        }
+    } else {
+       
+        return false; 
+    }
+}
+
+function visaRecivedstate($conn)
+{
+    $sql = "
+    SELECT 
+    assign_to_job.id AS assign_to_job_id,
+    assign_to_job.candidate_id,
+    assign_to_job.assign_state,
+    company.company_name,
+    job_title.job_title_name,
+    candidate.first_name,
+    candidate.last_name,
+    candidate.mobile,
+    candidate.employee_id
+
+FROM 
+    assign_to_job
+INNER JOIN 
+    job_order ON assign_to_job.job_order_id = job_order.id
+INNER JOIN 
+    company ON job_order.company_id = company.id
+INNER JOIN 
+    job_title ON job_order.job_title_id = job_title.id
+INNER JOIN 
+	candidate ON assign_to_job.candidate_id =candidate.id
+WHERE 
+	assign_to_job.isActive=1
+AND 
+assign_to_job.assign_state=6";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        $stmt->close();
+        return $data;
+    } else {
+        die("Prepare failed: " . $conn->error);
+    }
+}
+function updaterejected($conn, $assign_to_job_id){
+    $sql = "UPDATE assign_to_job SET assign_state = -1 WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+      
+        $stmt->bind_param("i", $assign_to_job_id);
+        if ($stmt->execute()) {
+           
+            $stmt->close();
+            return true; 
+        } else {
+            
+            $stmt->close();
+            return false;
+        }
+    } else {
+       
+        return false; 
+    }
+}
+
+
+function visaReject($conn)
+{
+    $sql = "
+    SELECT 
+    assign_to_job.id AS assign_to_job_id,
+    assign_to_job.candidate_id,
+    assign_to_job.assign_state,
+    company.company_name,
+    job_title.job_title_name,
+    candidate.first_name,
+    candidate.last_name,
+    candidate.mobile,
+    candidate.employee_id
+
+FROM 
+    assign_to_job
+INNER JOIN 
+    job_order ON assign_to_job.job_order_id = job_order.id
+INNER JOIN 
+    company ON job_order.company_id = company.id
+INNER JOIN 
+    job_title ON job_order.job_title_id = job_title.id
+INNER JOIN 
+	candidate ON assign_to_job.candidate_id =candidate.id
+WHERE 
+	assign_to_job.isActive=1
+AND 
+assign_to_job.assign_state=-1";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        $stmt->close();
+        return $data;
+    } else {
+        die("Prepare failed: " . $conn->error);
+    }
+}
+
+function updatefail($conn, $assignToJobIds)
+{
+    // Prepare the SQL statement
+    $sql = "UPDATE assign_to_job SET assign_state =0 WHERE id = ?";
+
+    // Initialize the statement
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Loop through each ID and execute the update
+    foreach ($assignToJobIds as $id) {
+        $stmt->bind_param('i',$id);
+        if (!$stmt->execute()) {
+            $stmt->close();
+            $conn->close();
+            return 0;
+        }
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+
+    return 1;
 }

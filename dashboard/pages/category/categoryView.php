@@ -1,21 +1,23 @@
 <button class="btn btn-primary mb-4" id="AddcategoryButton" style="height: 55px;">Add Category</button>
-    <div class="container">
-        <h3>Category List</h3>
-        <table id="categoryTable" class="table table-bordered table-striped">
-           
-        </table>
-    </div>
+<div class="container">
+    <h3>Category List</h3>
+    <table id="categoryTables" class="table table-bordered table-striped">
 
-    <script>
-        $(document).ready(function() {
+    </table>
+</div>
+
+<script>
+    $(document).ready(function() {
+        function categorydetails() {
+
             Swal.fire({
-                        title: 'Loading...',
-                        text: 'Please wait while we fetch the data.',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
+                title: 'Loading...',
+                text: 'Please wait while we fetch the data.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url: "../config/category/categoryViewConfig.php",
                 type: "GET",
@@ -25,7 +27,7 @@
                 success: function(response) {
                     Swal.close();
                     if (response.status === 'success') {
-                        $('#categoryTable').DataTable({
+                        $('#categoryTables').DataTable({
                             data: response.data,
                             columns: [{
                                     data: null,
@@ -34,12 +36,12 @@
                                         return meta.row + 1;
                                     }
                                 },
-                             
+
                                 {
                                     data: "categoryName",
                                     title: "Category Name"
                                 },
-                                
+
                                 {
                                     data: null,
                                     title: "Edit",
@@ -70,5 +72,50 @@
                     console.error('Error fetching data:', textStatus, errorThrown);
                 }
             });
-        });
-    </script>
+        }
+        categorydetails()
+        $('#categoryTables').on('click', '.delete-btn', function() {
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX call to delete the item
+                    $.ajax({
+                        type: 'POST',
+                        url: "../config/category/categoryViewConfig.php",
+                        data: {
+                            action: 'delete',
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'The record has been deleted.',
+                                icon: 'success'
+                            }).then(() => {
+                                // Call companyDetails function to reload the data
+                                categorydetails();
+                            });
+                        } else {
+                            Swal.fire('Error!', 'Failed to delete the record.', 'error');
+                        }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire('Error!', 'AJAX error: ' + error, 'error');
+                        }
+                    });
+                }
+            });
+        })
+
+    });
+</script>

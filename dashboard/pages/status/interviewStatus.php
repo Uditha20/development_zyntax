@@ -175,5 +175,47 @@
                     }
                 });
             });
+            $('#categoryTable').on('click', '.delete-btn', function() {
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX call to delete the item
+                    $.ajax({
+                        type: 'POST',
+                        url: '../config/status/assignConfig.php',
+                        data: {
+                            action: 'assigdelete',
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status === 'success') {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'The record has been deleted.',
+                                icon: 'success'
+                            }).then(() => {
+                                // Call companyDetails function to reload the data
+                                assignData();
+                            });
+                        } else {
+                            Swal.fire('Error!', 'Failed to delete the record.', 'error');
+                        }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire('Error!', 'AJAX error: ' + error, 'error');
+                        }
+                    });
+                }
+            });
+        })  
         });
     </script>

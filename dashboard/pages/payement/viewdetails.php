@@ -21,7 +21,7 @@
                     url: "../config/visa/visaConfig.php",
                     type: "GET",
                     data: {
-                        action: "visaProcess"
+                        action: "detailsvisaProcess"
                     },
                     success: function(response) {
                         // console.log(response);
@@ -58,7 +58,7 @@
                         },
                         {
                             data: "payed_Amount",
-                            title: "Total Payed",
+                            title: "Total Paid",
                             render: function(data, type, row) {
                                 return parseFloat(data).toFixed(2); // Format to 2 decimal places
                             }
@@ -69,6 +69,13 @@
                             render: function(data, type, row) {
                                 var dueAmount = parseFloat(row.payment) - parseFloat(row.payed_Amount);
                                 return dueAmount.toFixed(2); // Calculate and format to 2 decimal places
+                            }
+                        },
+                        {
+                            data: "last_pay_time",
+                            title: "Last Pay Date and Time",
+                            render: function(data, type, row) {
+                                return data ? new Date(data).toLocaleString() : ''; // Format date and time
                             }
                         },
                         {

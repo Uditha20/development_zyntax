@@ -12,6 +12,7 @@
             <div class="l1"><label>Country</label></div>
             <input type="text" class="form-control capitalize" id="country" name="country" placeholder="Ex : SriLanaka" required>
         </div>
+
     </div>
 
 
@@ -23,6 +24,19 @@
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Mobile Number</label></div>
             <input type="text" class="form-control" id="Mobile" name="phone" placeholder="Ex : " required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <div class="l1"><label>Job Approval ID</label></div>
+            <input type="text" class="form-control" id="Approval" name="Approval" placeholder="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="l1"><label>Company Address</label></div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="address" id="Approval" name="address" style="height: 80px"></textarea>
+                <label for="floatingTextarea2">address</label>
+            </div>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>

@@ -17,12 +17,16 @@ switch ($action) {
         $result = visaProcess($conn);
         echo json_encode(["status" => "success", "data" => $result]);
         break;
-    
+
     case 'newvisaProcess':
         $result =  newvisaProcess($conn);
         echo json_encode(["status" => "success", "data" => $result]);
         break;
-   
+    case 'detailsvisaProcess':
+        $result =  detailsvisaProcess($conn);
+        echo json_encode(["status" => "success", "data" => $result]);
+        break;
+
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
         break;

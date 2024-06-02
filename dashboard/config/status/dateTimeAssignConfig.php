@@ -98,7 +98,61 @@ if (isset($data['action']) && $data['action'] === 'saveData') {
                             'message' => 'Failed to update'
                         ]);
                     }
-                }  
+                } else{
+                    if (isset($data['action']) && $data['action'] === 'migratecandidate') {
+
+                        $assign_to_job_id = $data['assign_to_job_id'];
+                        $result=updateAssignState($conn, $assign_to_job_id);
+                        // $result = updatefinalselect($conn, $assignToJobIds);
+                        if ($result == 1) {
+                            echo json_encode([
+                                'status' => 'success',
+                                'message' => 'Update successfully'
+                            ]);
+                        } else {
+                            echo json_encode([
+                                'status' => 'error',
+                                'message' => 'Failed to update'
+                            ]);
+                        }
+                    } else{
+                        if (isset($data['action']) && $data['action'] === 'reject') {
+
+                            $assign_to_job_id = $data['assign_to_job_id'];
+                            $result=updaterejected($conn, $assign_to_job_id);
+                            // $result = updatefinalselect($conn, $assignToJobIds);
+                            if ($result == 1) {
+                                echo json_encode([
+                                    'status' => 'success',
+                                    'message' => 'reject successfully'
+                                ]);
+                            } else {
+                                echo json_encode([
+                                    'status' => 'error',
+                                    'message' => 'Failed to update'
+                                ]);
+                            }
+                        }else{
+                            if (isset($data['action']) && $data['action'] === 'failselectData') {
+
+                                $assignToJobIds = $data['assign_to_job_ids'];
+                                $result=updatefail($conn, $assignToJobIds);
+                                // $result = updatefinalselect($conn, $assignToJobIds);
+                                if ($result == 1) {
+                                    echo json_encode([
+                                        'status' => 'success',
+                                        'message' => 'update successfully'
+                                    ]);
+                                } else {
+                                    echo json_encode([
+                                        'status' => 'error',
+                                        'message' => 'Failed to update'
+                                    ]);
+                                }
+                            } 
+                        }
+                    } 
+                } 
             }
         }
     } 

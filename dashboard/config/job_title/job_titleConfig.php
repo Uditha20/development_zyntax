@@ -44,8 +44,28 @@ switch ($action) {
 
         break;
 
+    case 'delete':
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+            $result = deactivateJobtitle($conn, $id);
+            if($result===1){
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "Delete success..!"
+                ]);
+            }
+        }else {
+            echo json_encode(["status" => "error", "message" => "ID not provided"]);
+        }
+        break;
+    case 'getTItleDetails':
+        if(isset($_GET['id'])){
+            $jobTitleId=$_GET['id'];
+            $result=fetchJobTitleDetailsById($conn, $jobTitleId);
+            echo json_encode(["status" => "success", "data" => $result]);
+            break;
 
-
+        }
 
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);

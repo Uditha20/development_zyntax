@@ -11,8 +11,14 @@
                 <input type="time" class="form-control" id="timeInput" name="timeInput">
             </div>
          -->
-            <div class="col-md-3 mb-3" style="margin-top: 33px;">
-                <button type="button" class="btn btn-success" id="submitButton">pass</button>
+            <div class="row">
+
+                <div class="col-md-1 mb-3" style="margin-top: 33px;">
+                    <button type="button" class="btn btn-success" id="submitButton">Pass</button>
+                </div>
+                <div class="col-md-1 mb-3" style="margin-top: 33px;">
+                    <button type="button" class="btn btn-danger" id="failButton">Fail</button>
+                </div>
             </div>
 
         </div>
@@ -147,6 +153,62 @@
                     success: function(response) {
                         // console.log(response);
                         if (response.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Data has been Update successfully.',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Call assignData function
+                                    assignData();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: response.message,
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX error:', status, error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Failed to submit data.',
+                        });
+                    }
+                });
+            });
+            $('#failButton').click(function() {
+
+                const selectedIds = [];
+
+                $('.select-checkbox:checked').each(function() {
+                    selectedIds.push($(this).data('id'));
+                });
+
+                if (selectedIds.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'No Selection',
+                        text: 'Please select at least one item.',
+                    });
+                    return;
+                }
+                const dataToSend = {
+                    action: 'failselectData',
+                    assign_to_job_ids: selectedIds,
+                };
+                $.ajax({
+                    url: "../config/status/dateTimeAssignConfig.php",
+                    type: "POST",
+                    data: JSON.stringify(dataToSend),
+                    contentType: "application/json",
+                    success: function(response) {
+                         // console.log(response);
+                         if (response.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',

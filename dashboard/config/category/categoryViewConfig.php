@@ -19,6 +19,20 @@ switch ($action) {
             "data" => $categories
         ]);
         break;
+    case 'delete':
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $result = deactivateCategory($conn, $id);
+            if ($result === 1) {
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "Delete success..!"
+                ]);
+            }
+        } else {
+            echo json_encode(["status" => "error", "message" => "ID not provided"]);
+        }
+        break;
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
         break;

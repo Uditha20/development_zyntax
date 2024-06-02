@@ -148,7 +148,7 @@ function updatePaymentDetails($conn, $id, $additional_payed_amount) {
     $new_payed_amount = $current_payed_amount + $additional_payed_amount;
 
     // Step 3: Update the record with the new payed_amount
-    $update_sql = "UPDATE assign_to_job SET payed_Amount = ? WHERE id = ?";
+    $update_sql = "UPDATE assign_to_job SET payed_Amount = ?, last_pay_time = NOW() WHERE id = ?";
     $update_stmt = $conn->prepare($update_sql);
 
     if ($update_stmt) {

@@ -19,8 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || 'GET') {
                 $country = strtoupper(htmlspecialchars($_POST['country']));
                 $phone = htmlspecialchars($_POST['phone']);
                 $email = htmlspecialchars($_POST['email']);
+                $approval_Id = htmlspecialchars($_POST['Approval']);
+                $address = htmlspecialchars($_POST['address']);
                 // $companyName = strtoupper($companyName);
-                $result = insertCompany($companyName, $country, $phone, $email, $conn);
+                $result = insertCompany($companyName, $country, $phone, $email, $approval_Id, $address, $conn);
 
                 if ($result == 1) {
                     echo json_encode((["status" => "success"]));
@@ -36,6 +38,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || 'GET') {
                 "status" => "success",
                 "data" => $company
             ]);
+            break;
+        case 'getCompanyDetails':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $result = fetchCompanydetailsForEdit($conn, $id);
+                echo json_encode([
+                    "status" => "success",
+                    "data" => $result
+                ]);
+                break;
+            } else {
+                echo json_encode(["status" => "error", "message" => "id not selected"]);
+            }
+            break;
+        case 'updateCompany':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Retrieve and sanitize input data
+                $id = intval($_POST['id']);
+                $company_name = ucwords(strtolower(htmlspecialchars($_POST['companyname'])));
+                $country = ucwords(strtolower(htmlspecialchars($_POST['country'])));
+                $email = htmlspecialchars($_POST['email']);
+                $phone = htmlspecialchars($_POST['phone']);
+                $approval_Id = htmlspecialchars($_POST['Approval']);
+                $address = ucwords(strtolower(htmlspecialchars($_POST['address'])));
+                $result = updateCompanyDetails($conn, $id, $company_name, $country, $email, $phone, $approval_Id, $address);
+                echo json_encode(['status' => 'success', 'message' => 'update successfull']);
+                break;
+            }
+        case 'delete':
+            if(isset($_POST['id'])){
+                $id=$_POST['id'];
+                $result = deactivateCompany($conn, $id);
+                if($result===1){
+                    echo json_encode([
+                        "status" => "success",
+                        "message" => "Delete success..!"
+                    ]);
+                }
+            }else {
+                echo json_encode(["status" => "error", "message" => "ID not provided"]);
+            }
             break;
 
         default:

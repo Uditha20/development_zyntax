@@ -85,3 +85,65 @@ function getJobTitles($conn) {
         return [];
     }
 }
+
+function deactivateJobtitle($conn, $id) {
+    // Prepare the SQL statement with a placeholder
+    $stmt = $conn->prepare("UPDATE job_title SET isActive = 0 WHERE id = ?");
+    
+    // Check if the preparation was successful
+    if ($stmt === false) {
+        return 0;
+    }
+    
+    // Bind the parameters (i for integer)
+    $stmt->bind_param("i", $id);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        $stmt->close();
+        return 1;
+    } else {
+        $stmt->close();
+        return 0;
+    }
+}
+
+function fetchJobTitleDetailsById($conn, $jobTitleId) {
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("SELECT 
+                                id, 
+                                job_title_name, 
+                                category_id, 
+                                isActive 
+                            FROM 
+                                job_title 
+                            WHERE 
+                                id = ?");
+
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+    $stmt->bind_param("i", $jobTitleId);
+    if ($stmt->execute()) {
+      
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+          
+            $jobTitleDetails = $result->fetch_assoc();
+        } else {
+            $jobTitleDetails = null;
+        }
+ 
+        $result->free();
+    } else {
+        echo "Error: " . $stmt->error;
+        $jobTitleDetails = null; 
+    }
+
+    
+    $stmt->close();
+
+    // Return the job title details or null if not found
+    return $jobTitleDetails;
+}
+
