@@ -89,14 +89,14 @@
             $('#email').on('input', function () {
                 validateInput(this, this.nextElementSibling, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
             });
-            $("#myForm").submit(function (e) {
-                e.preventDefault();
-                var formData = new FormData(this);
-                console.log('Form Data:');
-                formData.forEach((value, key) => {
-                    console.log(key + ": " + value);
-                });
-            });
+            // $("#myForm").submit(function (e) {
+            //     e.preventDefault();
+            //     var formData = new FormData(this);
+            //     console.log('Form Data:');
+            //     formData.forEach((value, key) => {
+            //         console.log(key + ": " + value);
+            //     });
+            // });
             $("#myForm").submit(function (e) {
                 e.preventDefault(); // Prevent default form submission
 
@@ -115,10 +115,9 @@
                     });
                     return;
                 }
-
                 // If all fields are valid, proceed with AJAX submission
                 $.ajax({
-                    url: 'your_php_script.php',
+                    url:"../config/company/createFormConfig.php",
                     type: 'POST',
                     data: new FormData(this),
                     processData: false,

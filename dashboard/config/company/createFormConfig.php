@@ -11,36 +11,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
 
-    // Validate form data (example validation)
-    $namePattern = '/^[A-Z\s]+$/';
-    $phonePattern = '/^\+?\d{10,12}$/';
-    $emailPattern = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
+    echo "<script> alret($name); </script> ";
 
-    if (preg_match($namePattern, $name) && preg_match($namePattern, $country) && preg_match($phonePattern, $phone) && preg_match($emailPattern, $email)) {
-        // If all validations pass, process the data (e.g., insert into database)
-        $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $stmt = $db->prepare('INSERT INTO companies (name, country, phone, email) VALUES (?, ?, ?, ?)');
+    $stmt->bind_param('ssss', $name, $country, $phone, $email);
 
-        if ($db->connect_error) {
-            die(json_encode(['success' => false, 'message' => 'Database connection failed']));
-        }
-
-        $stmt = $db->prepare('INSERT INTO companies (name, country, phone, email) VALUES (?, ?, ?, ?)');
-        $stmt->bind_param('ssss', $name, $country, $phone, $email);
-
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Database insertion failed']);
-        }
-
-        $stmt->close();
-        $db->close();
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true]);
     } else {
-        // Send failure response if validation fails
-        echo json_encode(['success' => false, 'message' => 'Invalid form data']);
+        echo json_encode(['success' => false, 'message' => 'Database insertion failed']);
     }
+
+    $stmt->close();
+    $db->close();
+    
 } else {
-    // Send failure response if not a POST request
+    // Send filure response if not a POST request
     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
 }
 ?>
