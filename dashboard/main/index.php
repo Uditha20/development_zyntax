@@ -1,7 +1,7 @@
 <?php
 
 require_once '../headers/header.php'
-?>
+    ?>
 
 <div class="grid-container">
     <!-- Header -->
@@ -39,7 +39,7 @@ require_once '../headers/header.php'
             </li>
             <li class="sidebar-list-item">
                 <a href="#" class="dropdown-toggle">
-                <i class="bi bi-collection"></i> Category
+                    <i class="bi bi-collection"></i> Category
                 </a>
                 <ul class="list-unstyled mx-4 collapse" id="CategorySubmenu">
                     <li class="mt-2">
@@ -52,7 +52,7 @@ require_once '../headers/header.php'
             </li>
             <li class="sidebar-list-item">
                 <a href="#" class="dropdown-toggle">
-                <i class="bi bi-card-heading"></i> Job Title
+                    <i class="bi bi-card-heading"></i> Job Title
                 </a>
                 <ul class="list-unstyled mx-4 collapse" id="jobTitleSubmenu">
                     <li class="mt-2">
@@ -69,7 +69,7 @@ require_once '../headers/header.php'
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="CompanySubmenu">
                     <li class="mt-2">
-                        <a href="#">View</a>
+                        <a href="../pages/company/veiw.php">View</a>
                     </li>
                     <li class="mt-2">
                         <a href="../pages/company/createForm.php">Create</a>
@@ -78,7 +78,7 @@ require_once '../headers/header.php'
 
             </li>
             <li class="sidebar-list-item">
-                <a  href="#" class="dropdown-toggle">
+                <a href="#" class="dropdown-toggle">
                     <i class="bi bi-list-ol"></i> Job Orders
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="JobOrders">
@@ -94,7 +94,8 @@ require_once '../headers/header.php'
                 </ul>
             </li>
             <li class="sidebar-list-item">
-                <a href="#" data-bs-toggle="collapse" data-bs-target="#Status" aria-expanded="false" class="dropdown-toggle">
+                <a href="#" data-bs-toggle="collapse" data-bs-target="#Status" aria-expanded="false"
+                    class="dropdown-toggle">
                     <i class="bi bi-app-indicator"></i> Status
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="Status">
@@ -133,34 +134,34 @@ require_once '../headers/header.php'
 </div>
 <?php
 require_once '../headers/footer.php'
-?>
+    ?>
 <script>
-$(document).ready(function() {
-    // Initially hide the submenu
-    $('#candidateSubmenu').hide();
-    $('#CompanySubmenu').hide();
-    $('#JobOrders').hide();
-    $('#CategorySubmenu').hide();
-    $('#jobTitleSubmenu').hide();
+    $(document).ready(function () {
+        // Initially hide the submenu
+        $('#candidateSubmenu').hide();
+        $('#CompanySubmenu').hide();
+        $('#JobOrders').hide();
+        $('#CategorySubmenu').hide();
+        $('#jobTitleSubmenu').hide();
 
-    
-    
-    // Toggle the submenu on click
-    $('.dropdown-toggle').click(function(e) {
-        e.preventDefault();  
-        var submenu = $(this).next('ul');  
-        submenu.slideToggle();  
+
+
+        // Toggle the submenu on click
+        $('.dropdown-toggle').click(function (e) {
+            e.preventDefault();
+            var submenu = $(this).next('ul');
+            submenu.slideToggle();
+        });
     });
-});
 </script>
 <script>
-    $(document).ready(function() {
-     
+    $(document).ready(function () {
+
         // $('.main-container').load('card.php');       
-        $('.list-unstyled a').click(function(e) {
-            e.preventDefault(); 
+        $('.list-unstyled a').click(function (e) {
+            e.preventDefault();
             var page = $(this).attr('href');
-            $('.main-container').load(page); 
+            $('.main-container').load(page);
         });
     });
 </script>
