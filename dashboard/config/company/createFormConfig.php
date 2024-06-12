@@ -1,8 +1,7 @@
 <?php
 require_once '../../../db/dbconfig.php';
-require_once '../../functions/job_title/jobTitleFunction.php';
+require_once '../../functions/company/createFormFuntion.php';
 header('Content-Type: application/json');
-
 
 // $method = $_SERVER['REQUEST_METHOD'];
 // $action = '';
@@ -30,14 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Handle GET request - Fetch data
-    $DetailCategory = fetchActiveCategories1($conn);
-    echo json_encode(['email' => $email, 'company_name' => $company_name, 'country' => $country, 'phone' => $phone]);
-    // echo json_encode(["status" => "success", "data" => $DetailCategory]);
-
-    echo json_encode($DetailCategory);
+    $Details = fetchActiveCategories1($conn);
+    //echo json_encode(['email' => $email, 'company_name' => $company_name, 'country' => $country, 'phone' => $phone]);
+    echo json_encode(["status" => "success", "data" => $Details]);
+    //echo json_encode($Details);
 } else {
     // Send failure response if not a POST or GET request
     echo json_encode(['status' => 'fail', 'message' => 'Invalid request method']);
 }
 
-$conn->close();

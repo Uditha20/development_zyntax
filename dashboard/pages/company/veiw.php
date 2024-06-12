@@ -1,11 +1,12 @@
-<button type="button" id="loardData" class="btn btn-primary">Lorad Company List </button>
+<button type="button" id="loadData" class="btn btn-primary">Lorad Company List </button>
 
 <table class="table mt-3" id="dataTable">
     <thead>
         <tr>
             <th>Company Name</th>
             <th>Email</th>
-            <th>Age</th>
+            <th>country</th>
+            <th>phoneNo</th>
         </tr>
     </thead>
     <tbody>
@@ -30,9 +31,10 @@
                     // Insert data into table
                     response.data.forEach(function (user) {
                         var row = '<tr>' +
-                            '<td>' + user.name + '</td>' +
+                            '<td>' + user.company_name + '</td>' +
                             '<td>' + user.email + '</td>' +
-                            '<td>' + user.age + '</td>' +
+                            '<td>' + user.country + '</td>' +
+                            '<td>' + user.phone + '</td>' +
                             '</tr>';
                         tbody.append(row);
                     });
