@@ -31,11 +31,17 @@ switch ($action) {
             $categorySelect = htmlspecialchars($_POST['categorySelect']);
             $vacanciesCount = htmlspecialchars($_POST['vacanciescount']);
             $payment = htmlspecialchars($_POST['payment']);
+            $Currency = htmlspecialchars($_POST['Currency']);
+            $bureau = htmlspecialchars($_POST['bureau']);
+            $req = htmlspecialchars($_POST['req']);
+            $medicale = htmlspecialchars($_POST['medicale']);
+            $visafee = htmlspecialchars($_POST['visafee']);
+
 
             // Process the data, e.g., save to database
             // Placeholder processing
             // $result = saveToDatabase($companySelect, $categorySelect, $email, $phone);
-            $result = insertJobOrder($conn, $companySelect, $categorySelect, $vacanciesCount, $payment);
+            $result = insertJobOrder($conn, $companySelect, $categorySelect, $vacanciesCount, $payment, $Currency, $bureau, $req, $medicale, $visafee);
             if ($result == 1) {
                 echo json_encode(['status' => 'success', 'message' => 'Job order registered successfully']);
             } else {
@@ -48,18 +54,18 @@ switch ($action) {
 
     case 'getcomdata':
         $company = fetchCompany($conn);
-        $candidate=fetchCandidate($conn);
+        $candidate = fetchCandidate($conn);
         echo json_encode([
             "status" => "success",
             "company" => $company,
-            "candidate"=>$candidate
+            "candidate" => $candidate
         ]);
         break;
     case 'getJobDetails':
         if (isset($_POST['companyId'])) {
             $companyId = intval($_POST['companyId']);
             $result = fetchJobOrdersByCompanyId($conn, $companyId);
-            echo json_encode(["status"=>"success","jobDetails"=>$result]);
+            echo json_encode(["status" => "success", "jobDetails" => $result]);
         }
         break;
     case 'jobassign':
@@ -74,6 +80,38 @@ switch ($action) {
             }
         }
         break;
+    case 'editData':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $result = getJobOrderDetails($conn, $id);
+            echo json_encode(["status" => "success", "jobDetails" => $result]);
+        }
+        break;
+    case 'updatejob':
+
+        // All variables are set and not empty
+        $id = intval($_POST['id']);
+        $companySelect = htmlspecialchars($_POST['companySelect']);
+        $categorySelect = htmlspecialchars($_POST['categorySelect']);
+        $vacanciesCount = htmlspecialchars($_POST['vacanciescount']);
+        $payment = htmlspecialchars($_POST['payment']);
+        $Currency = htmlspecialchars($_POST['Currency']);
+        $bureau = htmlspecialchars($_POST['bureau']);
+        $req = htmlspecialchars($_POST['req']);
+        $medicale = htmlspecialchars($_POST['medicale']);
+        $visafee = htmlspecialchars($_POST['visafee']);
+        $result= updateJobOrder($conn, $id, $companySelect, $categorySelect, $vacanciesCount, $payment, $Currency, $bureau, $req, $medicale, $visafee);
+       if($result===1){
+
+           echo json_encode(["status" => "success", "message" => "successful update ...!"]);
+       }else{
+        echo json_encode(["status" => "fail", "message" => "fail to update"]);
+
+       }
+        
+
+        break;
+
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
         break;

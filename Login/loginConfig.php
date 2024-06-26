@@ -1,49 +1,45 @@
 <?php
+session_start();
 require_once '../db/dbconfig.php';
 
 header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the posted data
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    // function hashPassword($password)
-    // {
-    //     return password_hash($password, PASSWORD_BCRYPT);
-    // }
-    // $hashedPassword = hashPassword($password);
+    // Get the posted data and sanitize input
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    // $stmt = $conn->prepare("INSERT INTO user (userName, password) VALUES (?, ?)");
-    // $stmt->bind_param('ss', $username, $hashedPassword);
-    // $stmt->execute();
-    // $stmt->close();
-
-    // // echo json_encode([ "username"=>  $username,"message"=> $password]);
-    // // Validate input
     if (!empty($username) && !empty($password)) {
-        // Prepare and execute the query
-        $stmt = $conn->prepare("SELECT password FROM user WHERE userName = ?");
+        // Prepare and execute the query securely to prevent SQL injection
+        $stmt = $conn->prepare("SELECT id, password FROM user WHERE userName = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();
+
         if ($stmt->num_rows === 1) {
-            $stmt->bind_result($storedHashedPassword);
+            $stmt->bind_result($userId, $storedHashedPassword);
             $stmt->fetch();
 
             if (password_verify($password, $storedHashedPassword)) {
-                echo json_encode(["status" => "success", "message" => "Log in successful"]);
-            }else{
-                echo json_encode(["status" => "error", "message" => "Invalid Credenatials"]);
+                // Regenerate session ID to prevent session fixation attacks
+                session_regenerate_id();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['userId'] = $userId;
+                $_SESSION['username'] = $username;
 
+                echo json_encode(["status" => "success", "message" => "Log in successful"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Invalid credentials"]);
             }
         } else {
-            echo json_encode(["status" => "fail", "message" => "error"]);
+            echo json_encode(["status" => "error", "message" => "User not found"]);
         }
         $stmt->close();
     } else {
-        echo json_encode(["status" => "fail", "message" => "erro successful"]);
+        echo json_encode(["status" => "error", "message" => "Please fill in all fields"]);
     }
+} else {
+    echo json_encode(["status" => "error", "message" => "Invalid request method"]);
 }
-
 
 
 

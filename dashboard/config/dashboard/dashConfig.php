@@ -34,7 +34,7 @@ function getCounts($conn)
     }
 
     // Query to get the total count of assignments where isActive = 1
-    $sql_total_assign = "SELECT COUNT(*) AS total_assign_count FROM assign_to_job WHERE isActive = 1";
+    $sql_total_assign = "SELECT COUNT(*) AS total_assign_count FROM assign_to_job WHERE assign_state = 6 AND isActive = 1";
     $result_total_assign = $conn->query($sql_total_assign);
     if ($result_total_assign) {
         $row_total_assign = $result_total_assign->fetch_assoc();

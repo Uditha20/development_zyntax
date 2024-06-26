@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Edit Deails</button>
+    <button type="submit" class="btn btn-primary">Edit Details</button>
 </form>
 <script>
     $(document).ready(function() {

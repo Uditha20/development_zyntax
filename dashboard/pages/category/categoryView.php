@@ -46,7 +46,7 @@
                                     data: null,
                                     title: "Edit",
                                     render: function(data, type, row, meta) {
-                                        return '<button class="btn btn-warning btn-sm edit-btn" data-id="' + row.id + '">Edit</button>';
+                                        return '<button class="btn btn-warning btn-sm edit-btncat" data-id="' + row.id + '">Edit</button>';
                                     }
                                 },
                                 {

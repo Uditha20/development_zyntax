@@ -3,7 +3,7 @@
         <div class="col-md-6 mb-3">
             <div class="l1"><label>Company Name :</label></div>
             <div class="mb-3 col-md-6">
-                <select class="form-control border border-dark col-md-6" id="companySelect" name="companySelect" aria-describedby="categoryHelp">
+                <select class="form-control border border-dark col-md-6" id="companySelect" name="companySelect" aria-describedby="categoryHelp" required>
                     <option value="">Select a Company Name</option>
                 </select>
             </div>
@@ -11,11 +11,11 @@
         <div class="col-md-6 mb-3">
             <div class="mb-3 col-md-6">
                 <div>
-                    <div>Total vacances count: <span id="vacancesCount"></span></div>
+                    <!-- <div>Total vacances count: <span id="vacancesCount"></span></div> -->
                 </div>
                 <div class="l1"><label>Job Order:</label></div>
-                <select class="form-control border border-dark col-md-6" id="joborder" name="joborder" aria-describedby="categoryHelp">
-                    <option value="">Select a Company Name</option>
+                <select class="form-control border border-dark col-md-6" id="joborder" name="joborder" aria-describedby="categoryHelp" required>
+                    <option value="">Select a Job Title</option>
                 </select>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
             <div class="mb-3 col-md-6">
                 <div class="l1"><label>Candidate:</label></div>
-                <select class="form-control border border-dark col-md-6" id="Candidate" name="Candidate" aria-describedby="categoryHelp">
+                <select class="form-control border border-dark col-md-6" id="Candidate" name="Candidate" aria-describedby="categoryHelp" required>
                     <option value="">Select a Job Title</option>
                 </select>
             </div>

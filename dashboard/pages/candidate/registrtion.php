@@ -57,11 +57,12 @@
         </div>
         <div class="col-md-4 mb-3">
             <div class="l1"><label>WhatsApp Number</label></div>
-            <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Ex: 071xxxxxxx " required>
+            <input type="Number" class="form-control" id="Mobile" name="Mobile" placeholder="Ex: 071xxxxxxx " required>
+            <div id="mobileError" class="text-danger"></div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="l1"><label>Land Phone Number</label></div>
-            <input type="text" class="form-control" id="land" name="land" placeholder="Ex :011xxxxxxx ">
+            <input type="Number" class="form-control" id="land" name="land" placeholder="Ex :011xxxxxxx ">
         </div>
     </div>
     <div class="row">
@@ -101,6 +102,9 @@
         </div>
         <button type="submit" class="btn btn-primary col-md-3">Register</button>
 </form>
+
+
+
 <script>
     $(document).ready(function() {
         function fetchCandidateId() {
@@ -177,7 +181,15 @@
             }
 
             var formData = new FormData(this);
-
+            Swal.fire({
+                title: 'Uploading...',
+                text: 'Please wait while your data is being uploaded.',
+                icon: 'info',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             $.ajax({
                 url: '../config/candidate/candidateConfig.php', // Replace with the path to your PHP config file
                 type: 'POST',
@@ -187,7 +199,7 @@
                 success: function(response) {
                     // Handle success
                     // console.log(response);
-
+                    Swal.close();
                     // Show SweetAlert success message
                     Swal.fire({
                         title: 'Success!',

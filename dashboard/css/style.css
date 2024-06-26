@@ -228,6 +228,9 @@ CompanySubmenu .sidebar-responsive {
 .capitalize {
   text-transform: capitalize;
 }
+.Currency {
+  text-transform:uppercase;
+}
 
 .form-control{
   border: 1px solid;

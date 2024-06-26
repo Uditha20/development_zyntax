@@ -55,7 +55,7 @@ function getAssignedCandidates($conn)
         $result['error'] = "Failed to prepare the SQL statement.";
     }
 
-    
+
     return $result;
 }
 function updatePayment($conn, $id, $payment)
@@ -79,65 +79,138 @@ function updatePayment($conn, $id, $payment)
 
 
 
-function getPaymentDetails($conn, $id) {
-    // Initialize an empty result array
-    $result = array();
+// function getPaymentDetails($conn, $id) {
+//     // Initialize an empty result array
+//     $result = array();
 
+//     // Prepare the SQL statement
+//     $sql = "SELECT payment, payed_amount, due_amount FROM assign_to_job WHERE id = ?";
+//     $stmt = $conn->prepare($sql);
+
+//     // Check if the statement was prepared successfully
+//     if ($stmt) {
+//         // Bind the ID parameter
+//         $stmt->bind_param("i", $id);
+
+//         // Execute the statement
+//         $stmt->execute();
+
+//         // Declare variables to hold the results
+//         $payment = null;
+//         $payed_amount = null;
+//         $due_amount = null;
+
+//         // Bind the result variables
+//         $stmt->bind_result($payment, $payed_amount, $due_amount);
+
+//         // Fetch the result
+//         if ($stmt->fetch()) {
+//             $result = array(
+//                 'payment' => $payment,
+//                 'payed_amount' => $payed_amount,
+//                 'due_amount' => $due_amount
+//             );
+//         } else {
+//             $result['error'] = "No data found for the given ID.";
+//         }
+
+//         // Close the statement
+//         $stmt->close();
+//     } else {
+//         // Handle statement preparation error
+//         $result['error'] = "Failed to prepare the SQL statement.";
+//     }
+
+//     // Return the result array
+//     return $result;
+// }
+function getJobDetails($conn, $assign_to_job_id)
+{
     // Prepare the SQL statement
-    $sql = "SELECT payment, payed_amount, due_amount FROM assign_to_job WHERE id = ?";
+    $sql = "
+    SELECT 
+    a.id,
+    a.candidate_id,
+    a.assign_state,
+    a.payment,
+    a.payed_Amount,
+    a.last_pay_time,
+    c.first_name,
+    c.last_name,
+    c.employee_id
+FROM 
+    assign_to_job a
+JOIN 
+    candidate c ON a.candidate_id = c.id
+WHERE 
+    a.id = ?;";
+
+    // Initialize a statement and prepare the SQL query
     $stmt = $conn->prepare($sql);
-    
-    // Check if the statement was prepared successfully
-    if ($stmt) {
-        // Bind the ID parameter
-        $stmt->bind_param("i", $id);
-        
-        // Execute the statement
-        $stmt->execute();
-        
-        // Declare variables to hold the results
-        $payment = null;
-        $payed_amount = null;
-        $due_amount = null;
-        
-        // Bind the result variables
-        $stmt->bind_result($payment, $payed_amount, $due_amount);
-        
-        // Fetch the result
-        if ($stmt->fetch()) {
-            $result = array(
-                'payment' => $payment,
-                'payed_amount' => $payed_amount,
-                'due_amount' => $due_amount
-            );
-        } else {
-            $result['error'] = "No data found for the given ID.";
-        }
-        
-        // Close the statement
-        $stmt->close();
-    } else {
-        // Handle statement preparation error
-        $result['error'] = "Failed to prepare the SQL statement.";
+
+    if ($stmt === false) {
+        return array('error' => 'Failed to prepare statement.');
     }
 
-    // Return the result array
+    // Bind the parameter to the statement
+    $stmt->bind_param("i", $assign_to_job_id);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Define variables to store the result
+    $id = null;
+    $candidate_id = null;
+    $assign_state = null;
+    $payment = null;
+    $payed_amount = null;
+    $last_pay_time = null;
+    $first_name = null;
+    $last_name = null;
+    $employee_id = null;
+
+    // Bind the result variables
+    $stmt->bind_result($id, $candidate_id, $assign_state, $payment, $payed_amount, $last_pay_time, $first_name, $last_name, $employee_id);
+
+    // Fetch the data and set the result array
+    $result = array();
+    if ($stmt->fetch()) {
+        $result = array(
+            'assign_to_job_id' => $id,
+            'candidate_id' => $candidate_id,
+            'assign_state' => $assign_state,
+            'payment' => $payment,
+            'payed_amount' => $payed_amount,
+            'last_pay_time' => $last_pay_time,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'employee_id' => $employee_id
+        );
+    } else {
+        $result['error'] = "No data found for the given ID.";
+    }
+
+    // Close the statement
+    $stmt->close();
+
     return $result;
 }
 
-function updatePaymentDetails($conn, $id, $additional_payed_amount) {
+
+function updatePaymentDetails($conn, $id, $additional_payed_amount)
+{
     // Initialize variables to hold the existing payment details
-   
+
     $current_payed_amount = 0;
 
     // Step 1: Retrieve the current payed_amount
     $select_sql = "SELECT payed_Amount FROM assign_to_job WHERE id = ?";
     $select_stmt = $conn->prepare($select_sql);
-    
+
     if ($select_stmt) {
         $select_stmt->bind_param("i", $id);
         $select_stmt->execute();
-        $select_stmt->bind_result( $current_payed_amount);
+        $select_stmt->bind_result($current_payed_amount);
         $select_stmt->fetch();
         $select_stmt->close();
     } else {
@@ -155,11 +228,38 @@ function updatePaymentDetails($conn, $id, $additional_payed_amount) {
         $update_stmt->bind_param("di", $new_payed_amount, $id);
         $result = $update_stmt->execute();
         $update_stmt->close();
-        
+
         if ($result) {
             return 1; // Update was successful
         }
     }
-    
+
     return 0; // Update failed
+}
+
+
+function updatePaymentDetailsAll($id, $payment, $payedAmount,$conn) {
+
+    $stmt = $conn->prepare("UPDATE assign_to_job SET payment = ?, payed_Amount = ? WHERE id = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind parameters
+    $stmt->bind_param("ddi", $payment, $payedAmount, $id);
+
+    // Execute the query
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows > 0) {
+           return 1;
+        } else {
+          return 0;
+        }
+    } else {
+        echo "Error updating record: " . $stmt->error;
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }

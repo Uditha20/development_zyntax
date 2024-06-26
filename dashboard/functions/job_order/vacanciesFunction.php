@@ -14,7 +14,12 @@ function fetchActiveJobOrders($conn)
     company.company_name, 
     company.country, 
     company.phone,
-    COALESCE(assign_count.job_count, 0) AS job_count
+    COALESCE(assign_count.job_count, 0) AS job_count,
+    job_order.curency,
+    job_order.bureaufee,
+    job_order.reqfee,
+    job_order.medicalfee,
+    job_order.visafee
 FROM 
     job_order 
 INNER JOIN 

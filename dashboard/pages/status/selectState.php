@@ -88,13 +88,13 @@
                                     //         return '<button class="btn btn-warning btn-sm edit-btn" data-id="' + row.assign_to_job_id + '">Edit</button>';
                                     //     }
                                     // },
-                                    {
-                                        data: null,
-                                        title: "Delete",
-                                        render: function(data, type, row, meta) {
-                                            return '<button class="btn btn-danger btn-sm delete-btn" data-id="' + row.assign_to_job_id + '">Delete</button>';
-                                        }
-                                    }
+                                    // {
+                                    //     data: null,
+                                    //     title: "Delete",
+                                    //     render: function(data, type, row, meta) {
+                                    //         return '<button class="btn btn-danger btn-sm delete-btn" data-id="' + row.assign_to_job_id + '">Delete</button>';
+                                    //     }
+                                    // }
                                 ],
                                 "pageLength": 10,
                                 "lengthMenu": [

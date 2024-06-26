@@ -26,6 +26,20 @@ switch ($action) {
         $result =  detailsvisaProcess($conn);
         echo json_encode(["status" => "success", "data" => $result]);
         break;
+    case 'deletepay':
+        if(isset($_POST['id'])){
+            $id=$_POST['id'];
+            $result =  deactivatepay($conn, $id);
+            if($result===1){
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "Delete success..!"
+                ]);
+            }
+        }else {
+            echo json_encode(["status" => "error", "message" => "ID not provided"]);
+        }
+        break;
 
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);

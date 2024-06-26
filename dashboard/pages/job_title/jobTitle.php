@@ -4,13 +4,13 @@
     <div class="d-flex align-items-center" style="flex-direction: column;">
       <div class="mb-3 col-md-4">
         <label for="categorySelect" class="form-label">Category</label>
-        <select class="form-control border border-dark" id="categorySelect" aria-describedby="categoryHelp">
+        <select class="form-control border border-dark" id="categorySelect" aria-describedby="categoryHelp" required>
           <option value="">Select a category</option>
         </select>
       </div>
       <div class="mb-3 col-md-4">
         <label for="fieldNameInput" class="form-label">Field Name</label>
-        <input type="text" class="form-control border border-dark capitalize" id="fieldNameInput" aria-describedby="fieldNameHelp" placeholder="Ex: Software Engineering">
+        <input type="text" class="form-control border border-dark capitalize" id="fieldNameInput" aria-describedby="fieldNameHelp" placeholder="Ex: Software Engineering" required>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>
     </div>

@@ -18,18 +18,18 @@
 
     <div class="row">
         <div class="col-md-5 mb-3">
-            <div class="l1"><label>Email :</label></div>
-            <input type="email" class="form-control" id="Email" name="email" placeholder=" Ex " required>
+            <div class="l1"><label>Email</label></div>
+            <input type="email" class="form-control" id="Email" name="email" placeholder="Ex:sample@gmail.com " required>
         </div>
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Mobile Number</label></div>
-            <input type="text" class="form-control" id="Mobile" name="phone" placeholder="Ex : " required>
+            <input type="Number" class="form-control" id="Mobile" name="phone" placeholder="Ex: 071xxxxxxx " required>
         </div>
     </div>
     <div class="row">
         <div class="col-md-5 mb-3">
             <div class="l1"><label>Job Approval ID</label></div>
-            <input type="text" class="form-control" id="Approval" name="Approval" placeholder="" required>
+            <input type="text" class="form-control" id="Approval" name="Approval" placeholder="Ex:Jo/200/400/2024" required>
         </div>
         <div class="col-md-4 mb-3">
             <div class="l1"><label>Company Address</label></div>

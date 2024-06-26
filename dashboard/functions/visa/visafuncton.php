@@ -128,7 +128,9 @@ INNER JOIN
 WHERE 
 	assign_to_job.isActive=1
 AND 
-assign_to_job.assign_state >=4";
+assign_to_job.assign_state >=4
+AND 
+assign_to_job.ispayActive=1";
 
     if ($stmt = $conn->prepare($sql)) {
         $stmt->execute();
@@ -145,5 +147,27 @@ assign_to_job.assign_state >=4";
         return $data;
     } else {
         die("Prepare failed: " . $conn->error);
+    }
+}
+
+function deactivatepay($conn, $id) {
+    // Prepare the SQL statement with a placeholder
+    $stmt = $conn->prepare("UPDATE assign_to_job SET ispayActive = 0 WHERE id = ?");
+    
+    // Check if the preparation was successful
+    if ($stmt === false) {
+        return 0;
+    }
+    
+    // Bind the parameters (i for integer)
+    $stmt->bind_param("i", $id);
+    
+    // Execute the statement
+    if ($stmt->execute()) {
+        $stmt->close();
+        return 1;
+    } else {
+        $stmt->close();
+        return 0;
     }
 }

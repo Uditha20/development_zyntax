@@ -56,7 +56,7 @@
 
 <script>
     $(document).ready(function() {
-
+        
         $.ajax({
             url: '../config/dashboard/dashConfig.php',
             type: 'GET',
@@ -64,8 +64,8 @@
                 if (response.status === 'success') {
                     const data = response.data;
                     $('#activeCandidatesCount').text(data.candidate_count);
-                    $('#assignedCandidatesCount').text(data.active_assign_count);
-                    $('#totalAssignedCount').text(data.total_assign_count);
+                    $('#assignedCandidatesCount').text(data.total_assign_count);
+                    $('#totalAssignedCount').text(data.active_assign_count);
                 } else {
                     console.error('Error fetching data:', response.message);
                 }

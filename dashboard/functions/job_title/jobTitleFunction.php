@@ -147,3 +147,23 @@ function fetchJobTitleDetailsById($conn, $jobTitleId) {
     return $jobTitleDetails;
 }
 
+function updateJobTitle($conn, $id, $jobTitleName, $categoryId) {
+    // Prepare the SQL statement with placeholders
+    $stmt = $conn->prepare("UPDATE job_title SET job_title_name = ?, category_id = ? WHERE id = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // Bind the parameters to the placeholders
+    $stmt->bind_param("sii", $jobTitleName, $categoryId, $id);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $result = $stmt->affected_rows;
+        $stmt->close();
+        return $result; // Return the number of affected rows
+    } else {
+        $stmt->close();
+        return false; // Return false if execution failed
+    }
+}

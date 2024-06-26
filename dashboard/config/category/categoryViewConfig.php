@@ -33,6 +33,32 @@ switch ($action) {
             echo json_encode(["status" => "error", "message" => "ID not provided"]);
         }
         break;
+
+    case 'getCategoryDetails':
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $result = getCategoryNameById($conn, $id);
+            echo json_encode(["status"=>"success","data"=>$result]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "ID not provided"]);
+        }
+        break;
+    case 'updatecategory':
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $categoryName=$_POST['category'];
+            $result =updateCategory($conn, $id, $categoryName);
+            if ($result === 1) {
+                echo json_encode([
+                    "status" => "success",
+                    "message" => "update success..!"
+                ]);
+            }
+        } else {
+            echo json_encode(["status" => "error", "message" => "ID not provided"]);
+        }
+        break;
+
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
         break;

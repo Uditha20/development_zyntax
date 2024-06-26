@@ -10,13 +10,13 @@ if (isset($_GET['id'])) {
         <div class="d-flex align-items-center" style="flex-direction: column;">
             <div class="mb-3 col-md-4">
                 <label for="categorySelect" class="form-label">Category</label>
-                <select class="form-control border border-dark" id="categorySelect" aria-describedby="categoryHelp">
+                <select class="form-control border border-dark" name="categorySelect" id="categorySelect" aria-describedby="categoryHelp">
                     <option value="">Select a category</option>
                 </select>
             </div>
             <div class="mb-3 col-md-4">
                 <label for="fieldNameInput" class="form-label">Field Name</label>
-                <input type="text" class="form-control border border-dark capitalize" id="fieldNameInput" aria-describedby="fieldNameHelp" placeholder="Ex: Software Engineering">
+                <input type="text"  name="fieldNameInput"   class="form-control border border-dark capitalize" id="fieldNameInput" aria-describedby="fieldNameHelp" placeholder="Ex: Software Engineering">
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
@@ -96,34 +96,34 @@ if (isset($_GET['id'])) {
                 });
             }
 
-            // $('#editCompanyForm').on('submit', function(e) {
-            //     e.preventDefault();
-            //     var formData = new FormData(this);
-            //     formData.append('action', 'updateCompany');
-            //     formData.append('id', id);
-            //     $.ajax({
-            //         url: '../config/company/companyConfig.php',
-            //         type: 'POST',
-            //         data: formData,
-            //         contentType: false,
-            //         processData: false,
-            //         success: function(response) {
-            //             console.log(response);
-            //             Swal.fire({
-            //                 title: 'Success!',
-            //                 text: 'Company updated successfully.',
-            //                 icon: 'success',
-            //                 confirmButtonText: 'OK'
-            //             }).then((result) => {
-            //                 if (result.isConfirmed) {
-            //                     $('.main-container').load('../pages/company/viewCompany.php');
-            //                 }
-            //             });
-            //         },
-            //         error: function(xhr, status, error) {
-            //             Swal.fire('Error', 'Failed to update company.', 'error');
-            //         }
-            //     });
-            // });
+            $('#editTitle').on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append('action', 'updatetitle');
+                formData.append('id', id);
+                $.ajax({
+                    url: '../config/job_title/job_titleConfig.php',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Company updated successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('.main-container').load('../pages/job_title/viewjobTitle.php');
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Error', 'Failed to update company.', 'error');
+                    }
+                });
+            });
         });
     </script>

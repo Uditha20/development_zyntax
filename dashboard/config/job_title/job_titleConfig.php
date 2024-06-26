@@ -66,6 +66,16 @@ switch ($action) {
             break;
 
         }
+    case 'updatetitle':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve and sanitize input data
+            $id = intval($_POST['id']);
+            $categoryId = $_POST['categorySelect'];
+            $fieldName = $_POST['fieldNameInput'];
+            updateJobTitle($conn, $id,$fieldName, $categoryId);
+            echo json_encode(["status" => "success", "message" =>"success update"]);
+            break;
+        }
 
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);

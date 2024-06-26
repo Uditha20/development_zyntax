@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center" style="flex-direction: column;">
             <div class="mb-3 col-md-4">
                 <label for="exampleInputEmail1" class="form-label">Category Name</label>
-                <input type="text" class="form-control border border-dark capitalize" name="category" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex : ICT field">
+                <input type="text" class="form-control border border-dark capitalize" name="category" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex : ICT field" required>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </div>

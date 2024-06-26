@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+// Regenerate session ID periodically
+if (!isset($_SESSION['created'])) {
+    $_SESSION['created'] = time();
+} elseif (time() - $_SESSION['created'] > 1800) {
+    // Regenerate session ID every 30 minutes
+    session_regenerate_id(true);
+    $_SESSION['created'] = time();
+}
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location:../../index.php "); // Redirect to login page
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +36,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />   
      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css">
 
-     <title>Dashboard</title>
+     <title>Syntax</title>
 </head>
 
 <body>

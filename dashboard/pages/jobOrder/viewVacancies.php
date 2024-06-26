@@ -1,7 +1,7 @@
 <button class="btn btn-primary mb-4" id="createJobButton" style="height: 55px;">Add Job Order</button>
-    <div class="container">
+    <div class="table-container">
         <h3>Job Order List</h3>
-        <table id="jobDetailsTable" class="table table-bordered table-striped">
+        <table id="jobDetailsTable" class="table table-bordered table-striped display"  style="width: 100%;">
 
         </table>
     </div>
@@ -62,6 +62,22 @@
                                         title: "Payment for Job"
                                     },
                                     {
+                                        data: "bureaufee",
+                                        title: "Bureau Fee"
+                                    },  {
+                                        data: "reqfee",
+                                        title: "Recently Requirement"
+                                    },  {
+                                        data: "medicalfee",
+                                        title: "Medical Charges"
+                                    },  {
+                                        data: "visafee",
+                                        title: "⁠Visa Fee"
+                                    },  {
+                                        data: "curency",
+                                        title: "currency"
+                                    },
+                                    {
                                         data: "company_Email",
                                         title: "Company Email"
                                     },
@@ -77,7 +93,7 @@
                                         data: null,
                                         title: "Edit",
                                         render: function(data, type, row, meta) {
-                                            return '<button class="btn btn-warning btn-sm edit-btn" data-id="' + row.job_order_id + '">Edit</button>';
+                                            return '<button class="btn btn-warning btn-sm edit-btnjob" data-id="' + row.job_order_id + '">Edit</button>';
                                         }
                                     },
                                     {

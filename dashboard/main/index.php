@@ -130,17 +130,17 @@ require_once '../headers/header.php'
             </li>
             <li class="sidebar-list-item">
                 <a href="#" class="dropdown-toggle">
-                    <i class="bi bi-credit-card-2-back"></i> Payement
+                    <i class="bi bi-credit-card-2-back"></i> Payment
                 </a>
                 <ul class="collapse list-unstyled mx-4" id="visa">
                     <li class="mt-2">
-                        <a href="../pages/payement/addpayement.php">Add payement</a>
+                        <a href="../pages/payement/addpayement.php">Add payment</a>
                     </li>
-                    <li class="mt-2">
+                    <!-- <li class="mt-2">
                         <a href="../pages/payement/makepayement.php">Make payemnt</a>
-                    </li>
+                    </li> -->
                     <li class="mt-2">
-                        <a href="../pages/payement/viewdetails.php">Payement details</a>
+                        <a href="../pages/payement/viewdetails.php">Payment details</a>
                     </li>
 
                 </ul>
@@ -151,7 +151,12 @@ require_once '../headers/header.php'
                     <i class="bi bi-book"></i> Reports
                 </a>
             </li>
-
+            <li class="sidebar-list-item">
+                <a href="logout.php" target="_blank">
+                <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </li>
+            
         </ul>
     </aside>
     <!-- main section -->
@@ -233,7 +238,27 @@ require_once '../headers/footer.php'
             var id = $(this).data('id');
             $('.main-container').load('../pages/job_title/EditTitle.php?id=' + id);
         });
+        $(document).on('click', '.edit-btncat', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/category/editCategory.php?id=' + id);
+        });
+        $(document).on('click', '.makepayment', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/payement/makepayement.php?id=' + id);
+        });
+        $(document).on('click', '.edit-btnjob', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/jobOrder/Editjob.php?id=' + id);
+        });
+        $(document).on('click', '.editpay', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.main-container').load('../pages/payement/Editpayment.php?id=' + id);
+        });
+       
     });
 </script>
-
 <!-- <script src="../js/scripts.js"></script> -->

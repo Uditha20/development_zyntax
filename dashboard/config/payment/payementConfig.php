@@ -37,9 +37,10 @@ switch ($action) {
         }
         break;
     case 'getDetails':
-        if (isset($_POST['assig_id'])) {
-            $id = $_POST['assig_id'];
-            $result = getPaymentDetails($conn, $id);
+        if (isset($_GET['id'])) {
+            // echo json_encode(["id"=>$_GET['id']]);
+            $assign_to_job_id = $_GET['id'];
+            $result = getJobDetails($conn, $assign_to_job_id);
             echo json_encode([
                 "status" => "success",
                 "data" => $result
@@ -47,9 +48,9 @@ switch ($action) {
         }
         break;
     case 'makepayement':
-        if (isset($_POST['Candidate']) && isset($_POST['Pay_amount'])) {
+        if (isset($_POST['id']) && isset($_POST['Pay_amount'])) {
 
-            $id = $_POST['Candidate'];
+            $id = $_POST['id'];
             $additional_payed_amount = $_POST['Pay_amount'];
             $result = updatePaymentDetails($conn, $id, $additional_payed_amount);
             echo json_encode([
@@ -58,7 +59,27 @@ switch ($action) {
             ]);
         }
         break;
-
+    case 'updatepay':
+        if (isset($_POST['id']) && isset($_POST['Payed'])&& isset($_POST['Payement'])) {
+            
+            $id = $_POST['id'];
+            $payment = $_POST['Payement'];
+            $payedAmount = $_POST['Payed'];
+            $result=updatePaymentDetailsAll($id, $payment, $payedAmount,$conn);
+            if($result===1){
+                echo json_encode([
+                    "status" =>  'success',
+                    "message" => 'payement update success'
+                ]);
+            }else{
+                echo json_encode([
+                    "status" =>  'fail',
+                    "message" => 'payement update fail'
+                ]);
+            }
+         
+        }
+        break;
 
     default:
         echo json_encode(["status" => "error", "message" => "Invalid action"]);
