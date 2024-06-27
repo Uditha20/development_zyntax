@@ -9,6 +9,48 @@
 // visar apporve=6
 // visa reject =7
 
+
+function updateAssignToJobnew($rows, $conn) {
+    $response = ['status' => 'error', 'message' => 'Invalid data'];
+
+    if (is_array($rows) && !empty($rows)) {
+        $stmt = $conn->prepare("
+            UPDATE assign_to_job
+            SET interview_date = ?, interview_time = ?, interview = ?, interviewed = ?, `select` = ?, visa_process = ?
+            WHERE id = ?
+        ");
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($conn->error));
+        }
+
+        foreach ($rows as $row) {
+            $interviewDate = $row['Date'] ?: null;
+            $interviewTime = $row['Time'] ?: null;
+            $interview = $row['Interview'];
+            $interviewed = $row['Interviewed'];
+            $selectState = $row['SelectState'];
+            $visaProcess = $row['VisaProcess'];
+            $id = $row['id'];
+
+            $stmt->bind_param("sssiiii", $interviewDate, $interviewTime, $interview, $interviewed, $selectState, $visaProcess, $id);
+
+            if (!$stmt->execute()) {
+                die('Execute failed: ' . htmlspecialchars($stmt->error));
+            }
+        }
+
+        $stmt->close();
+        $response = ['status' => 'success', 'message' => 'Data updated successfully'];
+    } else {
+        $response['message'] = 'No valid data provided';
+    }
+
+    return $response;
+}
+
+
+
 function getAssignToJobDetails($conn)
 {
     $sql = "
@@ -25,7 +67,11 @@ function getAssignToJobDetails($conn)
     job_title.category_id,
     candidate.first_name,
     candidate.last_name,
-    candidate.employee_id
+    candidate.employee_id,
+    assign_to_job.interview,
+    assign_to_job.interviewed,
+    assign_to_job.select,
+    assign_to_job.visa_process
 FROM 
     assign_to_job
 INNER JOIN 

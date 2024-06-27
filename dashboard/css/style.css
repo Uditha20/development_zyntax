@@ -243,3 +243,34 @@ CompanySubmenu .sidebar-responsive {
 table.dataTable {
   width: 100%;
 }
+
+
+
+.select-state,
+.interview-state,
+.interviewed-state,
+.visa-process-state {
+    width: 100px;
+    padding: 2px;
+}
+
+.select-state option[value="0"],
+.interview-state option[value="0"],
+.interviewed-state option[value="0"],
+.visa-process-state option[value="0"] {
+    background-color: #ffcccc; /* Red for No/Fail */
+}
+
+.select-state option[value="1"],
+.interview-state option[value="1"],
+.visa-process-state option[value="1"] {
+    background-color: #ccffcc; /* Green for Yes/Pass */
+}
+
+.interviewed-state option[value="1"] {
+    background-color: #ccffcc; /* Green for Pass */
+}
+
+.interviewed-state option[value="2"] {
+    background-color: #ffcc99; /* Orange for Fail */
+}
