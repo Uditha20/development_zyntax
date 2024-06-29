@@ -3,7 +3,7 @@
 // Database connection
 $hostname = "localhost";
 $username = "root";
-$password = "admin";
+$password = "";
 $dbname = "zyntax";
 
 try {
@@ -11,8 +11,7 @@ try {
     // Set the PDO error mode to exception
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
-    } 
+    }
 } catch (Exception $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-?>

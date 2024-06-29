@@ -45,4 +45,4 @@ function insertJobTitle($jobTitleName, $categoryId,$conn) {
 
     return $result;
 }
-?>
+
